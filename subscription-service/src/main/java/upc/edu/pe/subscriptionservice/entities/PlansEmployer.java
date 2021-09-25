@@ -39,7 +39,7 @@ public class PlansEmployer {
 	@Column
 	private Long duration;
 
-	@Column(name = "create_at")
+	@Column(name = "created_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createAt;
 

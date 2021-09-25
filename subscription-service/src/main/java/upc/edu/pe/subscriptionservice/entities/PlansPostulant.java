@@ -36,7 +36,7 @@ public class PlansPostulant {
 	@Column
 	private int duration;
 
-	@Column(name = "create_at")
+	@Column(name = "created_at")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date createdAt;
 
