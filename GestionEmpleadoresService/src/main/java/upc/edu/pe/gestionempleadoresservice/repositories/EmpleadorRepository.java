@@ -7,6 +7,6 @@ import upc.edu.pe.gestionempleadoresservice.entities.Empleadores;
 import java.util.Optional;
 
 @Repository
-public interface EmpleadoresRepository extends JpaRepository<Empleadores, Long> {
+public interface EmpleadorRepository extends JpaRepository<Empleadores, Long> {
     Optional<Empleadores> findByDNI (Long aLong);
 }

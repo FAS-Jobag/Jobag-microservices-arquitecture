@@ -2,7 +2,6 @@ package upc.edu.pe.gestionempleadoresservice.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,7 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import upc.edu.pe.gestionempleadoresservice.entities.Empleadores;
-import upc.edu.pe.gestionempleadoresservice.services.EmpleadoresService;
+import upc.edu.pe.gestionempleadoresservice.services.EmpleadorService;
 
 import javax.validation.Valid;
 import java.util.HashMap;
@@ -22,9 +21,9 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/empleadores")
-public class EmpleadoresController {
+public class EmpleadorController {
     @Autowired
-    private EmpleadoresService empleadoresService;
+    private EmpleadorService empleadoresService;
 
     @PostMapping
     public ResponseEntity<Empleadores> createEmpleador(@Valid @RequestBody Empleadores empleadores, BindingResult result) throws Exception {

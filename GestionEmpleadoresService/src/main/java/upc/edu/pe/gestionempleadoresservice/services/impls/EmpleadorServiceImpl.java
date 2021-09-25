@@ -4,17 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import upc.edu.pe.gestionempleadoresservice.entities.Empleadores;
-import upc.edu.pe.gestionempleadoresservice.repositories.EmpleadoresRepository;
-import upc.edu.pe.gestionempleadoresservice.services.EmpleadoresService;
+import upc.edu.pe.gestionempleadoresservice.repositories.EmpleadorRepository;
+import upc.edu.pe.gestionempleadoresservice.services.EmpleadorService;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EmpleadoresServiceImpl implements EmpleadoresService {
+public class EmpleadorServiceImpl implements EmpleadorService {
 
     @Autowired
-    private EmpleadoresRepository empleadoresRepository;
+    private EmpleadorRepository empleadoresRepository;
 
     @Override
     public Empleadores getEmpleadores(Long id) {
