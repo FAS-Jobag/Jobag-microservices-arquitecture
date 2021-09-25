@@ -25,7 +25,7 @@ public class EmpleadorController {
     @Autowired
     private EmpleadorService empleadoresService;
 
-    @PostMapping
+    @PostMapping(path = "create")
     public ResponseEntity<Empleadores> createEmpleador(@Valid @RequestBody Empleadores empleadores, BindingResult result) throws Exception {
         if (result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
@@ -52,8 +52,8 @@ public class EmpleadorController {
     }
 
     //Para el numero de documento
-    @GetMapping(path = "/DNI/{DNI}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Empleadores> fetchByDNI (@PathVariable("DNI") Long DNI){
+    @GetMapping(path = "/dni/{dni}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Empleadores> fetchByDNI (@PathVariable("dni") Long DNI){
         try{
             //Para la gestion de los errores
             Optional<Empleadores> optionalCliente = empleadoresService.findByDNI(DNI);
@@ -69,7 +69,7 @@ public class EmpleadorController {
         }
     }
 
-    @GetMapping
+    @GetMapping(path = "all")
     public ResponseEntity<List<Empleadores>> listAllEmpleadores() throws Exception {
         List<Empleadores> empleadores = empleadoresService.findAll();
         if (empleadores.isEmpty()) {
@@ -78,7 +78,7 @@ public class EmpleadorController {
         return  ResponseEntity.ok(empleadores);
     }
 
-    @DeleteMapping(value = "/{id}")
+    @DeleteMapping(value = "delete/{id}")
     public ResponseEntity<Empleadores> deleteEmpleadores(@PathVariable("id") Long id) throws Exception {
         Empleadores empleadores = empleadoresService.getEmpleadores(id);
         if (empleadores == null) {
@@ -88,7 +88,7 @@ public class EmpleadorController {
         return ResponseEntity.ok(empleadores);
     }
 
-    @PutMapping(value = "/{id}")
+    @PutMapping(value = "update/{id}")
     public ResponseEntity<?> updateEmpleador(@PathVariable("id") Long id, @RequestBody Empleadores empleadores) throws Exception {
         Empleadores currentEmpleador = empleadoresService.getEmpleadores(id);
 
