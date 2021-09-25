@@ -1,9 +1,12 @@
 package upc.edu.pe.subscriptionservice.services;
 
-import upc.edu.pe.subscriptionservice.entities.PlansEmployer;
+import org.springframework.stereotype.Service;
+
+import upc.edu.pe.subscriptionservice.entities.PlanEmployer;
 
 /**
 * PlansEmployerService
 */
-public interface PlansEmployerService extends CrudServices<PlansEmployer, Long> {
+@Service
+public interface PlansEmployerService extends CrudServices<PlanEmployer, Long> {
 }

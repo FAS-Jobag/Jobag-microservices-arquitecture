@@ -19,7 +19,7 @@ import lombok.Data;
 @Entity
 @Table(name = "plans_postulant")
 @Data
-public class PlansPostulant {
+public class PlanPostulant {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -27,7 +27,7 @@ public class PlansPostulant {
 	@Column(length = 70)
 	private String description;
 
-	@Column(name = "limit-postulations")
+	@Column(name = "limit_postulations")
 	private Long limitPostulations;
 
 	@Column(name = "pre_design_templates")
