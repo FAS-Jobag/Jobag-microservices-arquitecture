@@ -1,9 +1,10 @@
-package pe.edu.upc.joboffersservice.services;
+package pe.edu.upc.joboffersservice.services.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.joboffersservice.entities.JobOffer;
 import pe.edu.upc.joboffersservice.repositories.JobOfferRepository;
+import pe.edu.upc.joboffersservice.services.JobOfferService;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +30,8 @@ public class JobOfferServiceImpl implements JobOfferService {
     }
 
     @Override
-    public JobOffer update(JobOffer jobOffer) throws Exception {
+    public JobOffer update(Long id, JobOffer jobOffer) throws Exception {
+        jobOffer.setId(id);
         return jobOfferRepository.save(jobOffer);
     }
 

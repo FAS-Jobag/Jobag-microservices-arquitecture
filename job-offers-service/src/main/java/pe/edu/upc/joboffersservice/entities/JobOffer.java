@@ -1,9 +1,14 @@
 package pe.edu.upc.joboffersservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
+// Entity used for the job description that is published
 
 @Data
 @Entity
@@ -21,6 +26,7 @@ public class JobOffer {
     private String type;
 
     // salary of work
+    @Column
     private Double salary;
 
     @Lob
@@ -53,5 +59,7 @@ public class JobOffer {
      * Relationships
      * */
 
-
+    @JsonIgnore
+    @OneToMany(mappedBy = "jobOffer") // inverse
+    List<Contract> contracts = new ArrayList<>();
 }
