@@ -2,6 +2,7 @@ package upc.edu.pe.gestionempleadoresservice.controller;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -25,6 +26,7 @@ public class EmpleadorController {
     @Autowired
     private EmpleadorService empleadoresService;
 
+    @Operation(summary="End-point para la creación del empleador", description="Completar los datos que se solicita", tags={"empleadores"})
     @PostMapping(path = "create")
     public ResponseEntity<Empleadores> createEmpleador(@Valid @RequestBody Empleadores empleadores, BindingResult result) throws Exception {
         if (result.hasErrors()){
@@ -34,6 +36,8 @@ public class EmpleadorController {
         return ResponseEntity.status(HttpStatus.CREATED).body(empleadorescreate);
     }
 
+    @Operation(summary="End-point para obtener la información de un empleador segun su 'id' ", description="Ingresar un numero de 'id'" +
+            "para obtener la información del empleador.", tags={"empleadores"})
     @GetMapping(path = "/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Empleadores> fetchById (@PathVariable("id") Long id){
         try{
@@ -52,6 +56,8 @@ public class EmpleadorController {
     }
 
     //Para el numero de documento
+    @Operation(summary="End-point para obtener la información de un empleador segun su 'dni' ", description="Ingresar un numero de 'dni'" +
+            "para obtener la información del empleador.", tags={"empleadores"})
     @GetMapping(path = "/dni/{dni}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Empleadores> fetchByDNI (@PathVariable("dni") Long DNI){
         try{
@@ -69,6 +75,8 @@ public class EmpleadorController {
         }
     }
 
+    @Operation(summary="End-point para obtener la información de todos los empleadores registrados", description="Mostrara a todos los empleadores que se" +
+            "registraron", tags={"empleadores"})
     @GetMapping(path = "all")
     public ResponseEntity<List<Empleadores>> listAllEmpleadores() throws Exception {
         List<Empleadores> empleadores = empleadoresService.findAll();
@@ -78,6 +86,8 @@ public class EmpleadorController {
         return  ResponseEntity.ok(empleadores);
     }
 
+    @Operation(summary="End-point para eliminar al empleador segun su 'id' ", description="Se eliminara a un empleador en especifico" +
+            "segun su 'id'", tags={"empleadores"})
     @DeleteMapping(value = "delete/{id}")
     public ResponseEntity<Empleadores> deleteEmpleadores(@PathVariable("id") Long id) throws Exception {
         Empleadores empleadores = empleadoresService.getEmpleadores(id);
@@ -88,6 +98,8 @@ public class EmpleadorController {
         return ResponseEntity.ok(empleadores);
     }
 
+    @Operation(summary="End-point para modificar los datos del empleador segun su 'id' ", description="Se modificara a un empleador en especifico" +
+            "segun su 'id' ", tags={"empleadores"})
     @PutMapping(value = "update/{id}")
     public ResponseEntity<?> updateEmpleador(@PathVariable("id") Long id, @RequestBody Empleadores empleadores) throws Exception {
         Empleadores currentEmpleador = empleadoresService.getEmpleadores(id);
