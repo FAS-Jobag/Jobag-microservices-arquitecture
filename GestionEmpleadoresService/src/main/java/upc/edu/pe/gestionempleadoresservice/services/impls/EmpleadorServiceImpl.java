@@ -3,7 +3,7 @@ package upc.edu.pe.gestionempleadoresservice.services.impls;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import upc.edu.pe.gestionempleadoresservice.entities.Empleadores;
+import upc.edu.pe.gestionempleadoresservice.entities.Empleador;
 import upc.edu.pe.gestionempleadoresservice.repositories.EmpleadorRepository;
 import upc.edu.pe.gestionempleadoresservice.services.EmpleadorService;
 
@@ -17,38 +17,38 @@ public class EmpleadorServiceImpl implements EmpleadorService {
     private EmpleadorRepository empleadoresRepository;
 
     @Override
-    public Empleadores getEmpleadores(Long id) {
-        Empleadores empleadores = empleadoresRepository.findById(id).orElse(null);
-        return empleadores;
+    public Empleador getEmpleadores(Long id) {
+        Empleador empleador = empleadoresRepository.findById(id).orElse(null);
+        return empleador;
     }
 
     @Transactional
     @Override
-    public Empleadores save(Empleadores entity) throws Exception {
+    public Empleador save(Empleador entity) throws Exception {
         return empleadoresRepository.save(entity);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<Empleadores> findAll() throws Exception {
+    public List<Empleador> findAll() throws Exception {
         return empleadoresRepository.findAll();
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<Empleadores> findById(Long aLong) throws Exception {
+    public Optional<Empleador> findById(Long aLong) throws Exception {
         return empleadoresRepository.findById(aLong);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<Empleadores> findByDNI(Long DNI) throws Exception {
+    public Optional<Empleador> findByDNI(Long DNI) throws Exception {
         return empleadoresRepository.findByDNI(DNI);
     }
 
     @Override
-    public Empleadores update(Empleadores entity) throws Exception {
-        Empleadores empleadoresDB = getEmpleadores(entity.getId());
+    public Empleador update(Empleador entity) throws Exception {
+        Empleador empleadoresDB = getEmpleadores(entity.getId());
         if (empleadoresDB == null){
             return  null;
         }
@@ -65,8 +65,8 @@ public class EmpleadorServiceImpl implements EmpleadorService {
 
     //Consultar
     @Override
-    public Empleadores deleteById(Empleadores empleadores) throws Exception {
-        Empleadores empleadoresDB = getEmpleadores(empleadores.getId());
+    public Empleador deleteById(Empleador empleadores) throws Exception {
+        Empleador empleadoresDB = getEmpleadores(empleadores.getId());
 
         if (null == empleadoresDB){
             return null;
