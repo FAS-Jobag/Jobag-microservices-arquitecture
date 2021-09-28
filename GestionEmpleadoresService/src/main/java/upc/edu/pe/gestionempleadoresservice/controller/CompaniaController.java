@@ -7,13 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import upc.edu.pe.gestionempleadoresservice.entities.Compania;
-import upc.edu.pe.gestionempleadoresservice.entities.Empleador;
 import upc.edu.pe.gestionempleadoresservice.services.CompaniaService;
 
 import javax.validation.Valid;
@@ -28,15 +24,43 @@ public class CompaniaController {
     @Autowired
     private CompaniaService companiaService;
 
-    @Operation(summary="End-point para la creación de una compania con su respectivo empleador y sector", description="Completar los datos que se solicita", tags={"companias"})
-    @PostMapping(path = "create-compania/Empleadores/empleadorId/{empleadorId}/Sector/{sectorId}")
-    public ResponseEntity<Compania> createCompania(@Valid @RequestBody Compania compania, BindingResult result) throws Exception {
+    @Operation(summary="End-point para la creación de la compania", description="Completar los datos que se solicita", tags={"companias"})
+    @PostMapping("empleador/{empleadorId}/sector/{sectorId}")
+    public ResponseEntity<Compania> createCompania(@Valid @RequestBody Compania compania,
+                                                   BindingResult result) {
         if (result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
         }
-        Compania companiaCreate =  companiaService.save(compania);
-        return ResponseEntity.status(HttpStatus.CREATED).body(companiaCreate);
+
+        Compania companiaDB = companiaService.createCompania(compania);
+
+        return  ResponseEntity.status( HttpStatus.CREATED).body(companiaDB);
     }
+
+    /*
+    @Operation(summary="End-point para obtener la información de todos las compania registradas", description="Mostrara a todas las companias que se" +
+            "registraron", tags={"companias"})
+    @GetMapping(path = "all")
+    public ResponseEntity<List<Compania>> listAllCompania(@RequestParam(name = "sectorId" , required = false) Long sectorId ) {
+
+        List<Compania> companias =  new ArrayList<>();
+        if (null ==  sectorId) {
+            companias = companiaService.findCompaniaAll();
+            if (companias.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+        }else{
+            Sector sector= new Sector();
+            sector.setId(sectorId);
+            companias = companiaService.findCompaniaBySector(sector);
+            if ( null == companias ) {
+                return  ResponseEntity.notFound().build();
+            }
+        }
+        return  ResponseEntity.ok(companias);
+    }
+
+     */
 
     private String formatMessage( BindingResult result){
         List<Map<String,String>> errors = result.getFieldErrors().stream()

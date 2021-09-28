@@ -3,13 +3,11 @@ package upc.edu.pe.gestionempleadoresservice.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import upc.edu.pe.gestionempleadoresservice.entities.Compania;
+import upc.edu.pe.gestionempleadoresservice.entities.Sector;
 
-import java.util.Optional;
+import java.util.List;
 
 @Repository
 public interface CompaniaRepository extends JpaRepository<Compania, Long> {
-    Optional<Compania> findByRuc (Long ruc);
-    Optional<Compania> findByPais (String pais);
-    Optional<Compania> findByCiudad (String ciudad);
-    Optional<Compania> findByDistrito (String distrito);
+    public List<Compania> findBySector (Sector sector);
 }

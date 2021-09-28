@@ -3,12 +3,14 @@ package upc.edu.pe.gestionempleadoresservice.services.impls;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import upc.edu.pe.gestionempleadoresservice.entities.Compania;
-import upc.edu.pe.gestionempleadoresservice.entities.Empleador;
 import upc.edu.pe.gestionempleadoresservice.entities.Sector;
 import upc.edu.pe.gestionempleadoresservice.repositories.CompaniaRepository;
 import upc.edu.pe.gestionempleadoresservice.repositories.EmpleadorRepository;
 import upc.edu.pe.gestionempleadoresservice.repositories.SectorRepository;
 import upc.edu.pe.gestionempleadoresservice.services.CompaniaService;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CompaniaServiceImpl implements CompaniaService {
@@ -22,22 +24,32 @@ public class CompaniaServiceImpl implements CompaniaService {
     private SectorRepository sectorRepository;
 
     @Override
-    public Empleador getEmpleador(Long id) {
-        return empleadorRepository.findById(id).orElse(null);
+    public List<Compania> findCompaniaAll() {
+        return companiaRepository.findAll();
     }
 
     @Override
-    public Sector getSector(Long id) {
-        return sectorRepository.findById(id).orElse(null);
+    public List<Compania> findCompaniaBySector(Sector sector) {
+        return companiaRepository.findBySector(sector);
+    }
+
+    @Override
+    public Compania createCompania(Compania compania) {
+        return companiaRepository.save(compania);
+    }
+
+    @Override
+    public Compania updateCompania(Compania compania) {
+        return null;
+    }
+
+    @Override
+    public void deleteCompania(Compania compania) {
+
     }
 
     @Override
     public Compania getCompania(Long id) {
-        return companiaRepository.findById(id).orElse(null);
-    }
-
-    @Override
-    public Compania save(Compania compania) throws Exception {
-        return companiaRepository.save(compania);
+        return null;
     }
 }

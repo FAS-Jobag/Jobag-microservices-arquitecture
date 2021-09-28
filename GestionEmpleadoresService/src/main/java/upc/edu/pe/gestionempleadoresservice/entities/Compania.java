@@ -1,9 +1,12 @@
 package upc.edu.pe.gestionempleadoresservice.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "companias")
@@ -37,14 +40,16 @@ public class Compania {
     @Column(length = 100)
     private String direccion;
 
-    @OneToOne( fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "fk_empelador_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull(message = "El sector no puede estar vacio")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_empleador_id")
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private Empleador empleador;
 
-    @ManyToOne( fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "fk_sector_id", nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
+    @NotNull(message = "El sector no puede estar vacio")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_sector_id")
+    @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private Sector sector;
 
     public Compania() {
@@ -143,21 +148,21 @@ public class Compania {
         return this;
     }
 
-    public Empleador getEmpleador() {
-        return empleador;
-    }
-
-    public Compania setEmpleador(Empleador empleador) {
-        this.empleador = empleador;
-        return this;
-    }
-
     public Sector getSector() {
         return sector;
     }
 
     public Compania setSector(Sector sector) {
         this.sector = sector;
+        return this;
+    }
+
+    public Empleador getEmpleador() {
+        return empleador;
+    }
+
+    public Compania setEmpleador(Empleador empleador) {
+        this.empleador = empleador;
         return this;
     }
 }
