@@ -55,7 +55,7 @@ public class SectorServiceImpl implements SectorService {
     @Override
     public void deleteById(Sector entity) throws Exception {
         Sector sectorDB = getSector(entity.getId());
-        
+
         sectorRepository.delete(sectorDB);
     }
 }
