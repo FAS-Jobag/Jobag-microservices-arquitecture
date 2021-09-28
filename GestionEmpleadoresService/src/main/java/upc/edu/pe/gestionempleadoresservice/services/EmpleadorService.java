@@ -1,12 +1,13 @@
 package upc.edu.pe.gestionempleadoresservice.services;
 
-import org.springframework.http.ResponseEntity;
 import upc.edu.pe.gestionempleadoresservice.entities.Empleador;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface EmpleadorService {
+    Empleador getEmpleador(Long id);
+
     //Para guardar una nueva entidad
     Empleador save(Empleador entity) throws Exception;
 
@@ -20,8 +21,8 @@ public interface EmpleadorService {
     Optional<Empleador> findByDNI (Long DNI) throws Exception;
 
     //Para cambiar los datos de la entidad
-    Empleador update (Long id, Empleador entity) throws Exception;
+    Empleador update (Empleador entity) throws Exception;
 
     //Eliminar por Id
-    ResponseEntity<?> deleteById(Long id) throws Exception;
+    void deleteById(Empleador empleadores) throws Exception;
 }

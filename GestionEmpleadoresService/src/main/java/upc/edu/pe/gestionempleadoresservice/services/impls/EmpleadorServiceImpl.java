@@ -1,7 +1,6 @@
 package upc.edu.pe.gestionempleadoresservice.services.impls;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import upc.edu.pe.gestionempleadoresservice.entities.Empleador;
@@ -16,6 +15,11 @@ public class EmpleadorServiceImpl implements EmpleadorService {
 
     @Autowired
     private EmpleadorRepository empleadorRepository;
+
+    @Override
+    public Empleador getEmpleador(Long id) {
+        return empleadorRepository.findById(id).orElse(null);
+    }
 
     @Transactional
     @Override
@@ -42,13 +46,28 @@ public class EmpleadorServiceImpl implements EmpleadorService {
     }
 
     @Override
-    public Empleador update(Long id, Empleador entity) throws Exception {
-        Empleador empleador = empleadorRepository.findById(id);
+    public Empleador update(Empleador entity) throws Exception {
+        Empleador empleadorDB = getEmpleador(entity.getId());
+
+        if (null == empleadorDB){
+            return null;
+        }
+
+        return empleadorRepository.save(
+                empleadorDB.setNombres(entity.getNombres())
+                .setApellidos(entity.getApellidos())
+                .setDNI(entity.getDNI())
+                .setCorreo(entity.getCorreo())
+                .setCelular(entity.getCelular())
+                .setContraseña(entity.getContraseña())
+        );
     }
 
     @Override
-    public ResponseEntity<?> deleteById(Long id) throws Exception {
-        return null;
+    public void deleteById(Empleador empleadores) throws Exception {
+        Empleador empleadorDB = getEmpleador(empleadores.getId());
+
+        empleadorRepository.delete(empleadorDB);
     }
 
 

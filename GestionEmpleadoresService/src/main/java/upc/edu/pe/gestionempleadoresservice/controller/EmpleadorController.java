@@ -90,11 +90,11 @@ public class EmpleadorController {
             "segun su 'id'", tags={"empleadores"})
     @DeleteMapping(value = "delete/{id}")
     public ResponseEntity<Empleador> deleteEmpleadores(@PathVariable("id") Long id) throws Exception {
-        Empleador empleadores = empleadoresService.getEmpleadores(id);
+        Empleador empleadores = empleadoresService.getEmpleador(id);
         if (empleadores == null) {
             return  ResponseEntity.notFound().build();
         }
-        empleadores = empleadoresService.deleteById(empleadores);
+        empleadoresService.deleteById(empleadores);
         return ResponseEntity.ok(empleadores);
     }
 
@@ -102,7 +102,7 @@ public class EmpleadorController {
             "segun su 'id' ", tags={"empleadores"})
     @PutMapping(value = "update/{id}")
     public ResponseEntity<?> updateEmpleador(@PathVariable("id") Long id, @RequestBody Empleador empleadores) throws Exception {
-        Empleador currentEmpleador = empleadoresService.getEmpleadores(id);
+        Empleador currentEmpleador = empleadoresService.getEmpleador(id);
 
         if ( null == currentEmpleador ) {
             return  ResponseEntity.notFound().build();
