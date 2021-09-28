@@ -9,4 +9,8 @@ import java.util.Optional;
 @Repository
 public interface EmpleadorRepository extends JpaRepository<Empleador, Long> {
     Optional<Empleador> findByDNI (Long aLong);
+    Boolean existsByDNI(Long DNI);
+    Boolean existsByCorreo(String correo);
+    Boolean existsByCelular(Long celular);
+    Boolean existsByContraseña(String contraseña);
 }
