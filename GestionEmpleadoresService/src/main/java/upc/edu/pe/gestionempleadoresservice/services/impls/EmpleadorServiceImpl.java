@@ -62,7 +62,7 @@ public class EmpleadorServiceImpl implements EmpleadorService {
         if (null == empleadorDB){
             return null;
         }
-        empleadorDB.getId();
+
         return empleadorRepository.save(
                 empleadorDB.setNombres(entity.getNombres())
                 .setApellidos(entity.getApellidos())
