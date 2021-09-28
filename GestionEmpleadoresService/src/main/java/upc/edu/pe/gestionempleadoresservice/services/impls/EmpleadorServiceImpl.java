@@ -3,7 +3,8 @@ package upc.edu.pe.gestionempleadoresservice.services.impls;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import upc.edu.pe.gestionempleadoresservice.entities.Empleadores;
+import upc.edu.pe.gestionempleadoresservice.entities.Empleador;
+import upc.edu.pe.gestionempleadoresservice.exception.ResourceNotFoundException;
 import upc.edu.pe.gestionempleadoresservice.repositories.EmpleadorRepository;
 import upc.edu.pe.gestionempleadoresservice.services.EmpleadorService;
 
@@ -14,66 +15,70 @@ import java.util.Optional;
 public class EmpleadorServiceImpl implements EmpleadorService {
 
     @Autowired
-    private EmpleadorRepository empleadoresRepository;
+    private EmpleadorRepository empleadorRepository;
 
     @Override
-    public Empleadores getEmpleadores(Long id) {
-        Empleadores empleadores = empleadoresRepository.findById(id).orElse(null);
-        return empleadores;
+    public Empleador getEmpleador(Long id) {
+        return empleadorRepository.findById(id).orElse(null);
     }
 
     @Transactional
     @Override
-    public Empleadores save(Empleadores entity) throws Exception {
-        return empleadoresRepository.save(entity);
+    public Empleador save(Empleador entity) throws Exception {
+        if (empleadorRepository.existsByDNI(entity.getDNI()))
+            throw new  ResourceNotFoundException("El DNI ya esta registrado");
+
+        if (empleadorRepository.existsByCorreo(entity.getCorreo()))
+            throw new  ResourceNotFoundException("El correo electronico ya esta en uso");
+
+        if (empleadorRepository.existsByCelular(entity.getCelular()))
+            throw new  ResourceNotFoundException("El número de celular ya existe");
+
+        return empleadorRepository.save(entity);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<Empleadores> findAll() throws Exception {
-        return empleadoresRepository.findAll();
+    public List<Empleador> findAll() throws Exception {
+        return empleadorRepository.findAll();
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<Empleadores> findById(Long aLong) throws Exception {
-        return empleadoresRepository.findById(aLong);
+    public Optional<Empleador> findById(Long aLong) throws Exception {
+        return empleadorRepository.findById(aLong);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public Optional<Empleadores> findByDNI(Long DNI) throws Exception {
-        return empleadoresRepository.findByDNI(DNI);
+    public Optional<Empleador> findByDNI(Long DNI) throws Exception {
+        return empleadorRepository.findByDNI(DNI);
     }
 
     @Override
-    public Empleadores update(Empleadores entity) throws Exception {
-        Empleadores empleadoresDB = getEmpleadores(entity.getId());
-        if (empleadoresDB == null){
-            return  null;
-        }
-        empleadoresDB.setId(entity.getId());
-        empleadoresDB.setNombres(entity.getNombres());
-        empleadoresDB.setApellidos(entity.getApellidos());
-        empleadoresDB.setDNI(entity.getDNI());
-        empleadoresDB.setCorreo(entity.getCorreo());
-        empleadoresDB.setCelular(entity.getCelular());
-        empleadoresDB.setContraseña(entity.getContraseña());
+    public Empleador update(Empleador entity) throws Exception {
+        Empleador empleadorDB = getEmpleador(entity.getId());
 
-        return  empleadoresRepository.save(empleadoresDB);
-    }
-
-    //Consultar
-    @Override
-    public Empleadores deleteById(Empleadores empleadores) throws Exception {
-        Empleadores empleadoresDB = getEmpleadores(empleadores.getId());
-
-        if (null == empleadoresDB){
+        if (null == empleadorDB){
             return null;
         }
 
-        empleadoresDB.setStatus("DELETED");
-        return empleadoresRepository.save(empleadoresDB);
+        return empleadorRepository.save(
+                empleadorDB.setNombres(entity.getNombres())
+                .setApellidos(entity.getApellidos())
+                .setDNI(entity.getDNI())
+                .setCorreo(entity.getCorreo())
+                .setCelular(entity.getCelular())
+                .setContraseña(entity.getContraseña())
+        );
     }
+
+    @Override
+    public void deleteById(Empleador empleadores) throws Exception {
+        Empleador empleadorDB = getEmpleador(empleadores.getId());
+
+        empleadorRepository.delete(empleadorDB);
+    }
+
 
 }

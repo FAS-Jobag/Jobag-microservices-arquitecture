@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import upc.edu.pe.gestionempleadoresservice.entities.Empleadores;
+import upc.edu.pe.gestionempleadoresservice.entities.Empleador;
 import upc.edu.pe.gestionempleadoresservice.services.EmpleadorService;
 
 import javax.validation.Valid;
@@ -28,24 +28,24 @@ public class EmpleadorController {
 
     @Operation(summary="End-point para la creación del empleador", description="Completar los datos que se solicita", tags={"empleadores"})
     @PostMapping(path = "create")
-    public ResponseEntity<Empleadores> createEmpleador(@Valid @RequestBody Empleadores empleadores, BindingResult result) throws Exception {
+    public ResponseEntity<Empleador> createEmpleador(@Valid @RequestBody Empleador empleadores, BindingResult result) throws Exception {
         if (result.hasErrors()){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, this.formatMessage(result));
         }
-        Empleadores empleadorescreate =  empleadoresService.save(empleadores);
+        Empleador empleadorescreate =  empleadoresService.save(empleadores);
         return ResponseEntity.status(HttpStatus.CREATED).body(empleadorescreate);
     }
 
     @Operation(summary="End-point para obtener la información de un empleador segun su 'id' ", description="Ingresar un numero de 'id'" +
             "para obtener la información del empleador.", tags={"empleadores"})
     @GetMapping(path = "/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Empleadores> fetchById (@PathVariable("id") Long id){
+    public ResponseEntity<Empleador> fetchById (@PathVariable("id") Long id){
         try{
             //Para la gestion de los errores
-            Optional<Empleadores> optionalCliente = empleadoresService.findById(id);
+            Optional<Empleador> optionalCliente = empleadoresService.findById(id);
 
             if (optionalCliente.isPresent()){
-                return new ResponseEntity<Empleadores>(optionalCliente.get(), HttpStatus.OK);
+                return new ResponseEntity<Empleador>(optionalCliente.get(), HttpStatus.OK);
             }else  {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
@@ -59,10 +59,10 @@ public class EmpleadorController {
     @Operation(summary="End-point para obtener la información de un empleador segun su 'dni' ", description="Ingresar un numero de 'dni'" +
             "para obtener la información del empleador.", tags={"empleadores"})
     @GetMapping(path = "/dni/{dni}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Empleadores> fetchByDNI (@PathVariable("dni") Long DNI){
+    public ResponseEntity<Empleador> fetchByDNI (@PathVariable("dni") Long DNI){
         try{
             //Para la gestion de los errores
-            Optional<Empleadores> optionalCliente = empleadoresService.findByDNI(DNI);
+            Optional<Empleador> optionalCliente = empleadoresService.findByDNI(DNI);
 
             if (optionalCliente.isPresent()){
                 return ResponseEntity.ok(optionalCliente.get());
@@ -78,8 +78,8 @@ public class EmpleadorController {
     @Operation(summary="End-point para obtener la información de todos los empleadores registrados", description="Mostrara a todos los empleadores que se" +
             "registraron", tags={"empleadores"})
     @GetMapping(path = "all")
-    public ResponseEntity<List<Empleadores>> listAllEmpleadores() throws Exception {
-        List<Empleadores> empleadores = empleadoresService.findAll();
+    public ResponseEntity<List<Empleador>> listAllEmpleadores() throws Exception {
+        List<Empleador> empleadores = empleadoresService.findAll();
         if (empleadores.isEmpty()) {
             return  ResponseEntity.noContent().build();
         }
@@ -89,20 +89,20 @@ public class EmpleadorController {
     @Operation(summary="End-point para eliminar al empleador segun su 'id' ", description="Se eliminara a un empleador en especifico" +
             "segun su 'id'", tags={"empleadores"})
     @DeleteMapping(value = "delete/{id}")
-    public ResponseEntity<Empleadores> deleteEmpleadores(@PathVariable("id") Long id) throws Exception {
-        Empleadores empleadores = empleadoresService.getEmpleadores(id);
+    public ResponseEntity<Empleador> deleteEmpleadores(@PathVariable("id") Long id) throws Exception {
+        Empleador empleadores = empleadoresService.getEmpleador(id);
         if (empleadores == null) {
             return  ResponseEntity.notFound().build();
         }
-        empleadores = empleadoresService.deleteById(empleadores);
+        empleadoresService.deleteById(empleadores);
         return ResponseEntity.ok(empleadores);
     }
 
     @Operation(summary="End-point para modificar los datos del empleador segun su 'id' ", description="Se modificara a un empleador en especifico" +
             "segun su 'id' ", tags={"empleadores"})
     @PutMapping(value = "update/{id}")
-    public ResponseEntity<?> updateEmpleador(@PathVariable("id") Long id, @RequestBody Empleadores empleadores) throws Exception {
-        Empleadores currentEmpleador = empleadoresService.getEmpleadores(id);
+    public ResponseEntity<?> updateEmpleador(@PathVariable("id") Long id, @RequestBody Empleador empleadores) throws Exception {
+        Empleador currentEmpleador = empleadoresService.getEmpleador(id);
 
         if ( null == currentEmpleador ) {
             return  ResponseEntity.notFound().build();
