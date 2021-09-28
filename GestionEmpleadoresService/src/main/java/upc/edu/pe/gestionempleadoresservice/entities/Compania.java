@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "companias")
-public class Company {
+public class Compania {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,10 +47,10 @@ public class Company {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Sector sector;
 
-    public Company() {
+    public Compania() {
     }
 
-    public Company(Long id, String nombreEmpresa, String description, Long ruc, String logo, String pais, String ciudad, String distrito, String direccion) {
+    public Compania(Long id, String nombreEmpresa, String description, Long ruc, String logo, String pais, String ciudad, String distrito, String direccion) {
         this.id = id;
         this.nombreEmpresa = nombreEmpresa;
         this.description = description;
@@ -66,7 +66,7 @@ public class Company {
         return id;
     }
 
-    public Company setId(Long id) {
+    public Compania setId(Long id) {
         this.id = id;
         return this;
     }
@@ -75,7 +75,7 @@ public class Company {
         return nombreEmpresa;
     }
 
-    public Company setNombreEmpresa(String nombreEmpresa) {
+    public Compania setNombreEmpresa(String nombreEmpresa) {
         this.nombreEmpresa = nombreEmpresa;
         return this;
     }
@@ -84,7 +84,7 @@ public class Company {
         return description;
     }
 
-    public Company setDescription(String description) {
+    public Compania setDescription(String description) {
         this.description = description;
         return this;
     }
@@ -93,7 +93,7 @@ public class Company {
         return ruc;
     }
 
-    public Company setRuc(Long ruc) {
+    public Compania setRuc(Long ruc) {
         this.ruc = ruc;
         return this;
     }
@@ -102,7 +102,7 @@ public class Company {
         return logo;
     }
 
-    public Company setLogo(String logo) {
+    public Compania setLogo(String logo) {
         this.logo = logo;
         return this;
     }
@@ -111,7 +111,7 @@ public class Company {
         return pais;
     }
 
-    public Company setPais(String pais) {
+    public Compania setPais(String pais) {
         this.pais = pais;
         return this;
     }
@@ -120,7 +120,7 @@ public class Company {
         return ciudad;
     }
 
-    public Company setCiudad(String ciudad) {
+    public Compania setCiudad(String ciudad) {
         this.ciudad = ciudad;
         return this;
     }
@@ -129,7 +129,7 @@ public class Company {
         return distrito;
     }
 
-    public Company setDistrito(String distrito) {
+    public Compania setDistrito(String distrito) {
         this.distrito = distrito;
         return this;
     }
@@ -138,7 +138,7 @@ public class Company {
         return direccion;
     }
 
-    public Company setDireccion(String direccion) {
+    public Compania setDireccion(String direccion) {
         this.direccion = direccion;
         return this;
     }
@@ -147,7 +147,7 @@ public class Company {
         return empleador;
     }
 
-    public Company setEmpleador(Empleador empleador) {
+    public Compania setEmpleador(Empleador empleador) {
         this.empleador = empleador;
         return this;
     }
@@ -156,7 +156,7 @@ public class Company {
         return sector;
     }
 
-    public Company setSector(Sector sector) {
+    public Compania setSector(Sector sector) {
         this.sector = sector;
         return this;
     }
