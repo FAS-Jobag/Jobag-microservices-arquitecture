@@ -35,7 +35,8 @@ public class PostulantServiceImpl implements PostulantService{
 
     @Transactional
     @Override
-    public Postulant update(Postulant entity) throws Exception {
+    public Postulant update(Long id, Postulant entity) throws Exception {
+        entity.setId(id);
         return postulantRepository.save(entity);
     }
 

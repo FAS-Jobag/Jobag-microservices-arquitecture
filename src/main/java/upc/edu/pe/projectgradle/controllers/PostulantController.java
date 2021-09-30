@@ -56,6 +56,16 @@ public class PostulantController {
         }
     }
 
+    @Operation(summary = "Update Postulant", tags = {"Postulants"})
+    @PutMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Postulant> updatePostulantById(@PathVariable Long id, @RequestBody Postulant postulant) {
+        try {
+            return ResponseEntity.ok(postulantService.update(id, postulant));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
     @Operation(summary = "Delete Postulant", tags = {"Postulants"})
     @DeleteMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Postulant> deletePostulantById(@PathVariable Long id) {
