@@ -17,8 +17,8 @@ public class SwaggerConfiguration {
 		return new OpenAPI()
 			.components(new Components())
 			.info(new Info()
-					.title("Project gradble with swagger")
-					.description("Projecto de prueba para implementar swagger en un micro servicio"));
+					.title("Postulant Microservice")
+					.description("Microservicio de Gestión de Postulantes"));
 	}
 
 
