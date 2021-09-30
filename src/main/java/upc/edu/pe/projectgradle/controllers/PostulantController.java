@@ -18,7 +18,14 @@ public class PostulantController {
 
     @Autowired
     private PostulantService postulantService;
-    
+
+
+    @Operation(summary = "All Postulants", tags = {"Postulants"})
+    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Postulant> getAll() throws Exception {
+        return postulantService.findAll();
+    }
+
     @Operation(summary = "Get postulant by ID", description = "Get postulant by ID", tags={"Postulants"})
     @GetMapping(path = "/postulants/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Postulant> fetchById(@PathVariable("id") Long id) {
