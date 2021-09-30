@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/sectores")
-public class SectorController {
+public class SectorController{
     @Autowired
     private SectorService sectorService;
 

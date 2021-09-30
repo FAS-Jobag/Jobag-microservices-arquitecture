@@ -2,7 +2,7 @@ package upc.edu.pe.gestionempleadoresservice.resource;
 
 import javax.persistence.Column;
 
-public class SaveCompaniaResource {
+public class SaveCompaniaResource{
     @Column(length = 30)
     private String nombreEmpresa;
 

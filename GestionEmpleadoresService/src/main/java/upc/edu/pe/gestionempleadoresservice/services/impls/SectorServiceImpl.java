@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class SectorServiceImpl implements SectorService {
+public class SectorServiceImpl implements SectorService{
     @Autowired
     private SectorRepository sectorRepository;
 

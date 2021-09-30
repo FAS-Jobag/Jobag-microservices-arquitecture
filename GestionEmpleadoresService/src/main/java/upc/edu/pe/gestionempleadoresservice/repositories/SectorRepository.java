@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import upc.edu.pe.gestionempleadoresservice.entities.Sector;
 
 @Repository
-public interface SectorRepository extends JpaRepository<Sector, Long> {
+public interface SectorRepository extends JpaRepository<Sector, Long>{
 }

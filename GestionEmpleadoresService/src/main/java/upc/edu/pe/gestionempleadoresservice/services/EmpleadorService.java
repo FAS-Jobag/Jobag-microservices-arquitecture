@@ -5,7 +5,7 @@ import upc.edu.pe.gestionempleadoresservice.entities.Empleador;
 import java.util.List;
 import java.util.Optional;
 
-public interface EmpleadorService {
+public interface EmpleadorService{
     Empleador getEmpleador(Long id);
 
     //Para guardar una nueva entidad

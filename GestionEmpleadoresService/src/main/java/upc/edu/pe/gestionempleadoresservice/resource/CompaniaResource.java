@@ -1,6 +1,6 @@
 package upc.edu.pe.gestionempleadoresservice.resource;
 
-public class CompaniaResource {
+public class CompaniaResource{
     //Compania
     private Long id;
     private String nombreEmpresa;

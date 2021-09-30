@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/empleadores")
-public class EmpleadorController {
+public class EmpleadorController{
     @Autowired
     private EmpleadorService empleadoresService;
 

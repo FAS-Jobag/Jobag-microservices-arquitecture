@@ -1,16 +1,12 @@
 package upc.edu.pe.gestionempleadoresservice.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Entity
 @Table(name = "companias")
-public class Compania {
+public class Compania{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,13 +36,11 @@ public class Compania {
     @Column(length = 100)
     private String direccion;
 
-    @NotNull(message = "El sector no puede estar vacio")
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_empleador_id")
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private Empleador empleador;
 
-    @NotNull(message = "El sector no puede estar vacio")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_sector_id")
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })

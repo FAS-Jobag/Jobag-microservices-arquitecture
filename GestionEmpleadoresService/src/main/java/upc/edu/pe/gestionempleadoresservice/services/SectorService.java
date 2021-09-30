@@ -5,7 +5,7 @@ import upc.edu.pe.gestionempleadoresservice.entities.Sector;
 import java.util.List;
 import java.util.Optional;
 
-public interface SectorService {
+public interface SectorService{
     Sector getSector(Long id);
 
     //Para guardar una nueva entidad

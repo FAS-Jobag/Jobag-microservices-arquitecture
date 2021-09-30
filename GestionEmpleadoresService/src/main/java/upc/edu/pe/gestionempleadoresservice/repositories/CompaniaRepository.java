@@ -8,6 +8,6 @@ import upc.edu.pe.gestionempleadoresservice.entities.Sector;
 import java.util.List;
 
 @Repository
-public interface CompaniaRepository extends JpaRepository<Compania, Long> {
+public interface CompaniaRepository extends JpaRepository<Compania, Long>{
     public List<Compania> findBySector (Sector sector);
 }
