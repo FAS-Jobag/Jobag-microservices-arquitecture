@@ -2,6 +2,7 @@ package pe.edu.upc.joboffersservice.entities;
 
 // Entity used for the creation of the videoconference
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.Entity;
@@ -47,5 +48,8 @@ public class Interview {
      * Relationships
      * */
 
-
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "job_offer_id")
+    private JobOffer jobOffer;
 }

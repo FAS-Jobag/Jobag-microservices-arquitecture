@@ -62,4 +62,8 @@ public class JobOffer {
     @JsonIgnore
     @OneToMany(mappedBy = "jobOffer") // inverse
     List<Contract> contracts = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "jobOffer") // inverse
+    List<Interview> interviews = new ArrayList<>();
 }
