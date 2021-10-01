@@ -7,8 +7,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.joboffersservice.entities.Contract;
+import pe.edu.upc.joboffersservice.entities.Interview;
 import pe.edu.upc.joboffersservice.entities.JobOffer;
 import pe.edu.upc.joboffersservice.services.ContractService;
+import pe.edu.upc.joboffersservice.services.InterviewService;
 import pe.edu.upc.joboffersservice.services.JobOfferService;
 
 import java.util.List;
@@ -21,6 +23,8 @@ public class JobOffersController {
     private JobOfferService jobOfferService;
     @Autowired
     private ContractService contractService;
+    @Autowired
+    private InterviewService interviewService;
 
     @Operation(summary = "find all job offer", tags = {"job-offers"})
     @ApiResponse(responseCode = "200", description = "this return a list of job offers")
@@ -79,10 +83,12 @@ public class JobOffersController {
      * Relationships
      */
 
+    // Relationship between Job Offers and Contracts
+
     @Operation(summary = "find all contracts by job offer id", tags = {"job-offers-contracts"})
     @ApiResponse(responseCode = "200", description = "this return a list of contracts of a job offer")
     @GetMapping(path = "{jobOfferId}/contracts", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Contract> getAllByOfferId(@PathVariable Long jobOfferId) throws Exception {
+    public List<Contract> getAllContractsByOfferId(@PathVariable Long jobOfferId) throws Exception {
         return contractService.findByJobOfferId(jobOfferId);
     }
 
@@ -95,5 +101,13 @@ public class JobOffersController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
+    }
+
+    // relationship between Job Offers and interviews
+    @Operation(summary = "find all interviews by job offer id", tags = {"job-offers-interviews"})
+    @ApiResponse(responseCode = "200", description = "this return a list of interviews of a job offer")
+    @GetMapping(path = "{jobOfferId}/interviews", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Interview> getAllInterviewsByOfferId(@PathVariable Long jobOfferId) throws Exception {
+        return interviewService.findByJobOfferId(jobOfferId);
     }
 }

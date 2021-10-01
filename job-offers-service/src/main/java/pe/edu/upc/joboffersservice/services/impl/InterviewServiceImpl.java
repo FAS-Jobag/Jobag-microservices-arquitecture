@@ -3,7 +3,9 @@ package pe.edu.upc.joboffersservice.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.joboffersservice.entities.Interview;
+import pe.edu.upc.joboffersservice.entities.JobOffer;
 import pe.edu.upc.joboffersservice.repositories.InterviewRepository;
+import pe.edu.upc.joboffersservice.repositories.JobOfferRepository;
 import pe.edu.upc.joboffersservice.services.InterviewService;
 
 import java.util.List;
@@ -13,6 +15,9 @@ import java.util.Optional;
 public class InterviewServiceImpl implements InterviewService {
     @Autowired
     private InterviewRepository interviewRepository;
+
+    @Autowired
+    private JobOfferRepository jobOfferRepository;
 
     @Override
     public Interview save(Interview interview) throws Exception {
@@ -38,5 +43,12 @@ public class InterviewServiceImpl implements InterviewService {
     @Override
     public void deleteById(Long id) throws Exception {
         interviewRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Interview> findByJobOfferId(Long offerId) throws Exception {
+        return jobOfferRepository.findById(offerId)
+                .map(JobOffer::getInterviews)
+                .orElseThrow();
     }
 }
