@@ -1,5 +1,6 @@
 package upc.edu.pe.projectgradle.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,7 +19,8 @@ public class Language {
     @Column(length = 40, nullable = false)
     private Integer level;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="professional_profile_id")
     private ProfessionalProfile professionalProfile;
 }

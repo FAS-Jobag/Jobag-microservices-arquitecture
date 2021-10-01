@@ -28,13 +28,15 @@ public class ProfessionalProfile {
     @JoinColumn(name = "fk_Postulant", updatable = false, nullable = false)
     private Postulant postulant;
 
-    @OneToMany(mappedBy = "professional_profile")
+
+
+    @OneToMany(mappedBy = "professionalProfile")
     List<Language> languages = new ArrayList<>();
 
-    @OneToMany(mappedBy = "professional_profile")
+    @OneToMany(mappedBy = "professionalProfile")
     List<Skill> skills = new ArrayList<>();
 
-    @OneToMany(mappedBy = "professional_profile")
-    List<Studie> studies = new ArrayList<>();
+    /*@OneToMany(mappedBy = "professionalProfile")
+    List<Studie> studies = new ArrayList<>();*/
 
 }

@@ -7,7 +7,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import upc.edu.pe.projectgradle.entity.Postulant;
+import upc.edu.pe.projectgradle.entity.ProfessionalProfile;
 import upc.edu.pe.projectgradle.services.PostulantService;
+import upc.edu.pe.projectgradle.services.ProfessionalProfileService;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,16 +21,19 @@ public class PostulantController {
     @Autowired
     private PostulantService postulantService;
 
+    @Autowired
+    private ProfessionalProfileService professionalProfileService;
+
 
     @Operation(summary = "All Postulants", tags = {"Postulants"})
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Postulant> getAll() throws Exception {
+    public List<Postulant> getAllPostulants() throws Exception {
         return postulantService.findAll();
     }
 
     @Operation(summary = "Get postulant by ID", description = "Get postulant by ID", tags={"Postulants"})
     @GetMapping(path = "/postulants/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Postulant> fetchById(@PathVariable("id") Long id) {
+    public ResponseEntity<Postulant> fetchPostulantById(@PathVariable("id") Long id) {
         try{
             Optional<Postulant> optionalPostulant = postulantService.findById(id);
 
@@ -72,6 +77,16 @@ public class PostulantController {
         try {
             postulantService.deleteById(id);
             return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @Operation(summary = "save a Professional Profile of a Postulant", tags = {"Professional Profiles"})
+    @PostMapping(path = "/postulants/{postulantId}/professional_profile", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ProfessionalProfile> createProfessionalProfile(@PathVariable Long postulantId, @RequestBody ProfessionalProfile professionalProfile) {
+        try {
+            return ResponseEntity.ok(professionalProfileService.saveByPostulantId(postulantId, professionalProfile));
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }

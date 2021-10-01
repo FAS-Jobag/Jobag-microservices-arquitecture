@@ -1,5 +1,6 @@
 package upc.edu.pe.projectgradle.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class Skill {
     @Column(nullable = false)
     private String description;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="professional_profile_id")
     private ProfessionalProfile professionalProfile;
