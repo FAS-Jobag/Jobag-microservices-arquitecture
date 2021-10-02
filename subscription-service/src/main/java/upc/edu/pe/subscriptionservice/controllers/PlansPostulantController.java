@@ -25,7 +25,7 @@ import upc.edu.pe.subscriptionservice.services.PlansPostulantService;
 * PlansPostulantController
 */
 @RestController
-@RequestMapping(name = "/plans_postulant")
+@RequestMapping("/plans_postulant")
 public class PlansPostulantController {
 
 	@Autowired
