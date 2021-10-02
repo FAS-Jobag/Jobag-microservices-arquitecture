@@ -54,7 +54,7 @@ public class PlansPostulantController {
 	@ApiResponses( value = {
 		@ApiResponse(responseCode = "200", description = "Created Plan", content = @Content(mediaType = "application/json"))
 	})
-	@PostMapping("/plan")
+	@PostMapping(path = "/plan", produces = MediaType.APPLICATION_JSON_VALUE)
 	public PlanPostulant createPlan (@RequestBody PlanPostulant entity) throws Exception{
 			PlanPostulant plan = entity;
 			return plansPostulantService.save(plan);
@@ -64,7 +64,7 @@ public class PlansPostulantController {
 	@ApiResponses( value = {
 		@ApiResponse(responseCode = "200", description = "Deleted Plan", content = @Content(mediaType = "application/json"))
 	})
-	@DeleteMapping("/plan/id/{id}")
+	@DeleteMapping(path = "/plan/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PlanPostulant> deleteById(@PathVariable("id") Long id){
 		try {
 			Optional<PlanPostulant>optionalPlanPostulant = plansPostulantService.findById(id);
@@ -83,7 +83,7 @@ public class PlansPostulantController {
 	@ApiResponses( value = {
 		@ApiResponse(responseCode = "200", description = "Listed Plans", content = @Content(mediaType = "application/json"))
 	})
-	@GetMapping("/plans")
+	@GetMapping(path = "/plans", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PlanPostulant>> fetchAllEntity(){
 		try {
 			List<PlanPostulant> optionalPlansPostulant = plansPostulantService.findAll();
