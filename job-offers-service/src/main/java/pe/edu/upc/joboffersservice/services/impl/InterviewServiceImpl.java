@@ -51,4 +51,12 @@ public class InterviewServiceImpl implements InterviewService {
                 .map(JobOffer::getInterviews)
                 .orElseThrow();
     }
+
+    @Override
+    public Interview saveByJobOfferId(Long jobOfferId, Interview interview) throws Exception {
+        return jobOfferRepository.findById(jobOfferId).map(jobOffer -> {
+            interview.setJobOffer(jobOffer);
+            return interviewRepository.save(interview);
+        }).orElseThrow();
+    }
 }

@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface InterviewService extends CrudService<Interview, Long> {
     List<Interview> findByJobOfferId(Long offerId) throws Exception;
+    Interview saveByJobOfferId(Long jobOfferId, Interview interview) throws Exception;
+
 }

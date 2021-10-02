@@ -104,10 +104,22 @@ public class JobOffersController {
     }
 
     // relationship between Job Offers and interviews
+
     @Operation(summary = "find all interviews by job offer id", tags = {"job-offers-interviews"})
     @ApiResponse(responseCode = "200", description = "this return a list of interviews of a job offer")
     @GetMapping(path = "{jobOfferId}/interviews", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Interview> getAllInterviewsByOfferId(@PathVariable Long jobOfferId) throws Exception {
         return interviewService.findByJobOfferId(jobOfferId);
+    }
+
+    @Operation(summary = "save an interview of a job offer", tags = {"job-offers-interviews"})
+    @ApiResponse(responseCode = "200", description = "this return the interview saved")
+    @PostMapping(path = "{jobOfferId}/interviews", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Interview> createInterview(@PathVariable Long jobOfferId, @RequestBody Interview interview) {
+        try {
+            return ResponseEntity.ok(interviewService.saveByJobOfferId(jobOfferId, interview));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
     }
 }
