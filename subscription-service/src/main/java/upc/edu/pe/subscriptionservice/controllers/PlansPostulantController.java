@@ -50,12 +50,20 @@ public class PlansPostulantController {
 		}
 	}
 
+	@Operation(summary = "Create Plan to Postulant", description = "Create new plan of subscription for new postulants", tags = {"plans_postulant"})
+	@ApiResponses( value = {
+		@ApiResponse(responseCode = "200", description = "Created Plan", content = @Content(mediaType = "application/json"))
+	})
 	@PostMapping("/plan")
 	public PlanPostulant createPlan (@RequestBody PlanPostulant entity) throws Exception{
 			PlanPostulant plan = entity;
 			return plansPostulantService.save(plan);
 	}
 
+	@Operation(summary = "Delete Plan to Postulants", description = "Delete and specific plan of subscription for postulant by id", tags = {"plans_postulant"})
+	@ApiResponses( value = {
+		@ApiResponse(responseCode = "200", description = "Deleted Plan", content = @Content(mediaType = "application/json"))
+	})
 	@DeleteMapping("/plan/id/{id}")
 	public ResponseEntity<PlanPostulant> deleteById(@PathVariable("id") Long id){
 		try {
@@ -70,6 +78,11 @@ public class PlansPostulantController {
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+
+	@Operation(summary = "List all plans for postulants", description = "List all plans available for postulants", tags = {"plans_postulant"})
+	@ApiResponses( value = {
+		@ApiResponse(responseCode = "200", description = "Listed Plans", content = @Content(mediaType = "application/json"))
+	})
 	@GetMapping("/plans")
 	public ResponseEntity<List<PlanPostulant>> fetchAllEntity(){
 		try {
