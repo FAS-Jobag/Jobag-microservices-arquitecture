@@ -36,7 +36,7 @@ public class ProfessionalProfile {
     @OneToMany(mappedBy = "professionalProfile")
     List<Skill> skills = new ArrayList<>();
 
-    /*@OneToMany(mappedBy = "professionalProfile")
-    List<Studie> studies = new ArrayList<>();*/
+    @OneToMany(mappedBy = "professionalProfile")
+    List<Studie> studies = new ArrayList<>();
 
 }
