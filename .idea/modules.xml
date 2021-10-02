@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Jobag-microservices-arquitecture.iml" filepath="$PROJECT_DIR$/.idea/Jobag-microservices-arquitecture.iml" />
+      <module fileurl="file://$PROJECT_DIR$/postulation-service/postulation-service.iml" filepath="$PROJECT_DIR$/postulation-service/postulation-service.iml" />
     </modules>
   </component>
 </project>
