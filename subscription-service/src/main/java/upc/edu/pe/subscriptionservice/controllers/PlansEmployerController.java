@@ -31,7 +31,7 @@ public class PlansEmployerController {
 	@Autowired
 	private PlansEmployerService plansEmployerService;
 
-	@Operation(summary = "Find plan for employer", description = "Find plan for employers by id", tags = {"employer_postulant"})
+	@Operation(summary = "Find plan for employer", description = "Find plan for employers by id", tags = {"plans_employer"})
 	@ApiResponses( value = {
 		@ApiResponse(responseCode = "200", description = "Find plan", content = @Content(mediaType = "application/json"))
 	})
@@ -50,7 +50,7 @@ public class PlansEmployerController {
 		}
 	}
 
-	@Operation(summary = "Create plan for employer", description = "Create Plan for employer", tags = {"employer_postulant"})
+	@Operation(summary = "Create plan for employer", description = "Create Plan for employer", tags = {"plans_employer"})
 	@ApiResponses( value = {
 		@ApiResponse(responseCode = "200", description = "Created plan", content = @Content(mediaType = "application/json"))
 	})
@@ -60,7 +60,7 @@ public class PlansEmployerController {
 		return plansEmployerService.save(plan);
 	}
 
-	@Operation(summary = "Delete plan for employer", description = "Delete plan for Employer", tags = {"employer_postulant"})
+	@Operation(summary = "Delete plan for employer", description = "Delete plan for Employer", tags = {"plans_employer"})
 	@ApiResponses( value = {
 		@ApiResponse(responseCode = "200", description = "Deleted plan", content = @Content(mediaType = "application/json"))
 	})
@@ -79,7 +79,7 @@ public class PlansEmployerController {
 		}
 	}
 
-	@Operation(summary = "List all Plans for employers", description = "List all plans available for employers", tags = {"employer_postulant"})
+	@Operation(summary = "List all Plans for employers", description = "List all plans available for employers", tags = {"plans_employer"})
 	@ApiResponses( value = {
 		@ApiResponse(responseCode = "200", description = "Listed plans", content = @Content(mediaType = "application/json"))
 	})
