@@ -10,5 +10,8 @@
         <module name="postulation-service.main" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="postulation-service" target="11" />
+    </bytecodeTargetLevel>
   </component>
 </project>
