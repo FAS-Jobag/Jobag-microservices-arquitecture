@@ -1,5 +1,5 @@
 package upc.edu.pe.projectgradle.entity;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -37,4 +37,8 @@ public class Postulant {
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
+
+    @JsonIgnore
+    @OneToOne(mappedBy = "postulant", cascade = CascadeType.ALL)
+    private ProfessionalProfile professionalProfile;
 }
