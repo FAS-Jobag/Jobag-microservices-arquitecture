@@ -15,5 +15,3 @@ spring:
       routes:
         - id: subscription-service
           uri: ld://subscription-service
-          predicates:
-            - Path=/plans_postulant/**
