@@ -6,11 +6,9 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/upc-is/fas-spring-micro-ms.git
+          uri: https://github.com/FAS-Jobag/Jobag-microservices-arquitecture.git
           searchPaths: config-data
-          username: ${GIT_USER}
-          password: ${GIT_PASSWORD}
-          default-label: "master"
+          default-label: "feature/add-config"
   security:
     user:
       name: root
