@@ -14,4 +14,6 @@ spring:
           enabled: true
       routes:
         - id: subscription-service
-          uri: ld://subscription-service
+          uri: lb://subscription-service
+          predicates:
+            - Path=/subscriptions/**
