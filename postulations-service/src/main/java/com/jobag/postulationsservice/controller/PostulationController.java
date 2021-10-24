@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/postulations")
@@ -24,14 +23,6 @@ public class PostulationController {
             return  ResponseEntity.notFound().build();
         }
         return  ResponseEntity.ok(postulation);
-        /*
-        try {
-            Optional<Postulation> result = postulationService.findById(id);
-            return result.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
-        }
-         */
     }
 
     @Operation(summary="End-point para obtener la información de todas las postulaciones registradas",
@@ -74,12 +65,13 @@ public class PostulationController {
         }
     }
 
-    @GetMapping(value = "/{id}")
-    public ResponseEntity<Postulation> getPostulation(@PathVariable("id") Long id) {
-        Postulation postulation  = postulationService.getPostulation(id);
-        if (null == postulation) {
-            return  ResponseEntity.notFound().build();
+    @PostMapping(path = "jobOffer/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Postulation> saveByJobOfferId(@PathVariable Long id, @RequestBody Postulation Postulation) {
+        try {
+            return ResponseEntity.ok(postulationService.createPostulacionByJobOfferId(id, Postulation));
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
         }
-        return  ResponseEntity.ok(postulation);
     }
+
 }
