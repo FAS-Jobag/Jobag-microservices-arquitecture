@@ -6,9 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "job-offers-service", fallback = JobOfferHystrixFallbackFactory.class)
-
+@FeignClient(name = "job-offer-service", fallback = JobOfferHystrixFallbackFactory.class)
 public interface JobOfferClient {
-    @GetMapping(value = "/job-offers/{id}")
-    public ResponseEntity<JobOffer> getJobOffer(@PathVariable("id") long id);
+    @GetMapping(value = "/api/job-offers/{id}")
+    public ResponseEntity<JobOffer> getJobOffer(@PathVariable("id") Long id);
 }

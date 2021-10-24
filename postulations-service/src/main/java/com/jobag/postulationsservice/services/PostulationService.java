@@ -5,4 +5,5 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface PostulationService extends CrudServices<Postulation, Long> {
+    public Postulation getPostulation(Long id);
 }

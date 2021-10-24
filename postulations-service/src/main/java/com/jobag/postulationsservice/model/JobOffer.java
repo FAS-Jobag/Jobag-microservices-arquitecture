@@ -10,19 +10,12 @@ import java.util.Date;
 public class JobOffer {
 
     private Long id;
-
     private String name;
-
     private String type;
-
     private Double salary;
-
     private String description;
-
     private String workplace;
-
     private Date date;
-
     private String experience;
 
 }
