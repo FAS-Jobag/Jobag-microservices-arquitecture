@@ -22,5 +22,26 @@ spring:
     properties:
       hibernate:
         show_sql: true
-        user_sql_comment: false
-        format_sql: false
+        user_sql_comment: true
+        format_sql: true
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8099/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+# Feign and Hystrix
+Feign:
+  hystrix:
+    enabled: true
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "*"
