@@ -24,3 +24,16 @@ spring:
         show_sql: true
         user_sql_comment: false
         format_sql: false
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8099/eureka/
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

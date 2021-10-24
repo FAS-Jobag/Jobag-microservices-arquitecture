@@ -26,7 +26,7 @@ import upc.edu.pe.subscriptionservice.services.PlansEmployerService;
 * PlansEmployerController
 */
 @RestController
-@RequestMapping("/plans_employers")
+@RequestMapping("/subscriptions")
 public class PlansEmployerController {
 	@Autowired
 	private PlansEmployerService plansEmployerService;
@@ -35,7 +35,7 @@ public class PlansEmployerController {
 	@ApiResponses( value = {
 		@ApiResponse(responseCode = "200", description = "Find plan", content = @Content(mediaType = "application/json"))
 	})
-	@GetMapping(path = "/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/id/{id}/employers", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PlanEmployer> fetchById(@PathVariable("id") Long id){
 		try {
 			Optional<PlanEmployer> optionalPlanEmployer = plansEmployerService.findById(id);
@@ -54,7 +54,7 @@ public class PlansEmployerController {
 	@ApiResponses( value = {
 		@ApiResponse(responseCode = "200", description = "Created plan", content = @Content(mediaType = "application/json"))
 	})
-	@PostMapping(path = "/plan", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(path = "/employers", produces = MediaType.APPLICATION_JSON_VALUE)
 	public PlanEmployer createEmployer(@RequestBody PlanEmployer entity) throws Exception{
 		PlanEmployer plan = entity;
 		return plansEmployerService.save(plan);
@@ -64,7 +64,7 @@ public class PlansEmployerController {
 	@ApiResponses( value = {
 		@ApiResponse(responseCode = "200", description = "Deleted plan", content = @Content(mediaType = "application/json"))
 	})
-	@DeleteMapping(path = "/plan/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	@DeleteMapping(path = "/id/{id}/employers", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<PlanEmployer> deleteById(@PathVariable("id") Long id){
 		try {
 			Optional<PlanEmployer> optionalPlanEmployer = plansEmployerService.findById(id);
@@ -83,7 +83,7 @@ public class PlansEmployerController {
 	@ApiResponses( value = {
 		@ApiResponse(responseCode = "200", description = "Listed plans", content = @Content(mediaType = "application/json"))
 	})
-	@GetMapping(path = "/plans", produces = MediaType.APPLICATION_JSON_VALUE)
+	@GetMapping(path = "/employers", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<PlanEmployer>> fetchAllEntity(){
 		try {
 			List<PlanEmployer> optionalPlansEmployers = plansEmployerService.findAll();
