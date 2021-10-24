@@ -2,11 +2,15 @@ package com.jobag.postulationsservice.entity;
 
 import com.jobag.postulationsservice.model.JobOffer;
 import com.jobag.postulationsservice.model.ProfessionalProfile;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Entity
+@Table(name = "postulations")
+@Data
 public class Postulation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
