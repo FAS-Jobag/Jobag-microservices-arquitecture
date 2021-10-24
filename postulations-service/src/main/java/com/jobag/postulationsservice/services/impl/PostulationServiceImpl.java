@@ -3,10 +3,12 @@ package com.jobag.postulationsservice.services.impl;
 import com.jobag.postulationsservice.entity.Postulation;
 import com.jobag.postulationsservice.repository.PostulationRepository;
 import com.jobag.postulationsservice.services.PostulationService;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class PostulationServiceImpl implements PostulationService {
     private PostulationRepository postulationRepository;
 

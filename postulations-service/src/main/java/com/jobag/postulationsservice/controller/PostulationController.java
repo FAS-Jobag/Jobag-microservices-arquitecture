@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+@RestController
+@RequestMapping("/postulations")
 public class PostulationController {
     @Autowired
     private PostulationService postulationService;
 
-    @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Postulation> getById(@PathVariable Long id) {
         try {
             Optional<Postulation> result = postulationService.findById(id);
