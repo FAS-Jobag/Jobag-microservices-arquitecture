@@ -17,3 +17,7 @@ spring:
           uri: lb://subscription-service
           predicates:
             - Path=/subscriptions/**
+        - id: postulations-service
+          uri: lb://postulations-service
+          predicates:
+            - Path=/postulations/**

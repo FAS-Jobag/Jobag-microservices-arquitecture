@@ -36,16 +36,6 @@ public class PostulationController {
         return  ResponseEntity.ok(postulations);
     }
 
-    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Postulation> save(@RequestBody Postulation Postulation) {
-        try {
-            return ResponseEntity.ok(postulationService.save(Postulation));
-        } catch (Exception e) {
-            return ResponseEntity.internalServerError().build();
-        }
-    }
-
-
     @PutMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Postulation> update(@PathVariable Long id, @RequestBody Postulation Postulation) {
         try {
