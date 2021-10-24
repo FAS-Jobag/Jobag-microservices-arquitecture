@@ -2,11 +2,15 @@ package com.jobag.postulationsservice.entity;
 
 import com.jobag.postulationsservice.model.JobOffer;
 import com.jobag.postulationsservice.model.ProfessionalProfile;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+@Entity
+@Table(name = "postulations")
+@Data
 public class Postulation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,18 +19,16 @@ public class Postulation {
     @Column(name = "job_offer_id")
     private Long jobOfferId;
 
-
     @Column(name = "create_at")
     @Temporal(TemporalType.DATE)
     private Date createAt;
 
-
-    @Transient
-    private List<ProfessionalProfile> professionalProfileList;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "invoice_id")
+    private List<PostulationItem> postulationItem;
 
     @Transient
     private JobOffer jobOffer;
-
 
     @PrePersist
     public void prePersist() {

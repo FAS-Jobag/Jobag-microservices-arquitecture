@@ -8,7 +8,7 @@ spring:
         git:
           uri: https://github.com/FAS-Jobag/Jobag-microservices-arquitecture.git
           searchPaths: config-data
-          default-label: "feature/add-config"
+          default-label: "feature/postulaciones"
   security:
     user:
       name: root

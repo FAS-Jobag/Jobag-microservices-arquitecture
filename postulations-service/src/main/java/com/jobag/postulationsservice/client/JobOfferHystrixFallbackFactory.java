@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class JobOfferHystrixFallbackFactory implements JobOfferClient{
     @Override
-    public ResponseEntity<JobOffer> getJobOffer(long id) {
+    public ResponseEntity<JobOffer> getJobOffer(Long id) {
         JobOffer jobOffer = JobOffer.builder()
                 .name("none")
                 .type("none")
@@ -16,8 +16,6 @@ public class JobOfferHystrixFallbackFactory implements JobOfferClient{
                 .workplace("none")
                 .date(new Date())
                 .experience("none").build();
-
         return ResponseEntity.ok(jobOffer);
-
     }
 }

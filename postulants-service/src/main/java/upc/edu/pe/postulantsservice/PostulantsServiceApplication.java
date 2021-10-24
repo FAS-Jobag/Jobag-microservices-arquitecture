@@ -1,4 +1,4 @@
-package pe.edu.upc.joboffersservice;
+package upc.edu.pe.postulantsservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,10 +12,9 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableFeignClients
 @EnableHystrix
 @EnableHystrixDashboard
-public class JobOffersServiceApplication {
+public class PostulantsServiceApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(JobOffersServiceApplication.class, args);
-    }
-
+	public static void main(String[] args) {
+		SpringApplication.run(PostulantsServiceApplication.class, args);
+	}
 }
