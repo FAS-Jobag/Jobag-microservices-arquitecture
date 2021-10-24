@@ -1,8 +1,13 @@
 server:
   port: 8091
+  error:
+    include-message: always
+    include-binding-errors: always
+
 springdoc:
   swagger_ui:
     path: /project-api-doc-ui.html
+
 spring:
   h2:
     console:
@@ -28,20 +33,9 @@ spring:
 logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+
+# Eureka Client
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8099/eureka/
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
-# Feign and Hystrix
-Feign:
-  hystrix:
-    enabled: true
-hystrix:
-  dashboard:
-    proxy-stream-allow-list: "*"
