@@ -26,7 +26,7 @@ public class PostulantController {
 
 
     @Operation(summary = "All Postulants", tags = {"Postulants"})
-    @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/postulants", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<Postulant> getAllPostulants() throws Exception {
         return postulantService.findAll();
     }
@@ -62,7 +62,7 @@ public class PostulantController {
     }
 
     @Operation(summary = "Update Postulant", tags = {"Postulants"})
-    @PutMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(path = "/postulants/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Postulant> updatePostulantById(@PathVariable Long id, @RequestBody Postulant postulant) {
         try {
             return ResponseEntity.ok(postulantService.update(id, postulant));
@@ -72,7 +72,7 @@ public class PostulantController {
     }
 
     @Operation(summary = "Delete Postulant", tags = {"Postulants"})
-    @DeleteMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(path = "/postulants/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Postulant> deletePostulantById(@PathVariable Long id) {
         try {
             postulantService.deleteById(id);

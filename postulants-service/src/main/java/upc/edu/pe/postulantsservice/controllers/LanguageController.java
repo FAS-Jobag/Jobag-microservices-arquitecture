@@ -24,6 +24,12 @@ public class LanguageController {
         return languageService.findAll();
     }
 
+    @Operation(summary = "All Languages by Professional Profile ID", tags = {"Languages"})
+    @GetMapping(path = "/professional_profile/{id}/languages", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Language> getAllLanguagesByProfessionalProfileID(@PathVariable("id") Long id) throws Exception {
+        return languageService.getLanguagesByProfessionalProfileId(id);
+    }
+
     @Operation(summary = "Get Language by ID", description = "Get Language by ID", tags={"Languages"})
     @GetMapping(path = "/languages/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Language> fetchLanguagesById(@PathVariable("id") Long id) {

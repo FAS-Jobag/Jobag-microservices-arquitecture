@@ -57,4 +57,11 @@ public class SkillServiceImpl implements SkillService{
             return skillRepository.save(skill);
         }).orElseThrow();
     }
+
+    @Override
+    public List<Skill> getSkillsByProfessionalProfileId(Long id) throws Exception {
+        return professionalProfileRepository.findById(id).map(professionalProfile -> {
+            return professionalProfile.getSkills();
+        }).orElseThrow();
+    }
 }

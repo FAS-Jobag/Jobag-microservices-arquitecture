@@ -58,4 +58,11 @@ public class StudieServiceImpl implements StudieService{
             return studieRepository.save(studie);
         }).orElseThrow();
     }
+
+    @Override
+    public List<Studie> getStudiesByProfessionalProfileID(Long professionalProfileId) throws Exception {
+        return professionalProfileRepository.findById(professionalProfileId).map(professionalProfile -> {
+            return professionalProfile.getStudies();
+        }).orElseThrow();
+    }
 }

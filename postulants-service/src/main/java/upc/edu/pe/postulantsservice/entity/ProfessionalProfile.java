@@ -1,5 +1,6 @@
 package upc.edu.pe.postulantsservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -24,18 +25,22 @@ public class ProfessionalProfile {
     private String experiencie;
 
     @OneToOne
+    @JsonIgnore
     @JoinColumn(name = "fk_Postulant", updatable = false, nullable = false)
     private Postulant postulant;
 
 
 
     @OneToMany(mappedBy = "professionalProfile")
+    @JsonIgnore
     List<Language> languages = new ArrayList<>();
 
     @OneToMany(mappedBy = "professionalProfile")
+    @JsonIgnore
     List<Skill> skills = new ArrayList<>();
 
     @OneToMany(mappedBy = "professionalProfile")
+    @JsonIgnore
     List<Studie> studies = new ArrayList<>();
 
 }

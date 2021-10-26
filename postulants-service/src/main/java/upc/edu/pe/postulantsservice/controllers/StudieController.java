@@ -24,6 +24,12 @@ public class StudieController {
         return studieService.findAll();
     }
 
+    @Operation(summary = "All Studies by Professional Profile ID", tags = {"Studies"})
+    @GetMapping(path = "/professional_profile/{id}/studies", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Studie> getAllStudiesByProfessionalProfileID(@PathVariable("id") Long id) throws Exception {
+        return studieService.getStudiesByProfessionalProfileID(id);
+    }
+
     @Operation(summary = "Get Studie by ID", description = "Get Studie by ID", tags={"Studies"})
     @GetMapping(path = "/studies/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Studie> fetchById(@PathVariable("id") Long id) {

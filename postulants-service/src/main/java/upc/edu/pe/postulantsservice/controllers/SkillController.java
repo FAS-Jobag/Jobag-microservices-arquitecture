@@ -41,6 +41,12 @@ public class SkillController {
         }
     }
 
+    @Operation(summary = "All Skills by Professional Profile ID", tags = {"Skills"})
+    @GetMapping(path = "/professional_profile/{id}/skills", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<Skill> getAllSkillsByProfessionalProfileID(@PathVariable("id") Long id) throws Exception {
+        return skillService.getSkillsByProfessionalProfileId(id);
+    }
+
     /*@Operation(summary = "Post Skill", description = "Post Skill", tags={"Skills"})
     @PostMapping(path = "/skills", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Skill> postSkill(@RequestBody Skill skill) {

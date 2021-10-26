@@ -90,7 +90,7 @@ public class ProfessionalProfileController {
         }
     }
 
-    @Operation(summary = "save a Language of a ProfessionalProfileId", tags = {"Languages"})
+    @Operation(summary = "save a Language of a ProfessionalProfileId", tags = {"Professional Profiles"})
     @PostMapping(path = "/professional_profile/{id}/languages", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Language> createLanguage(@PathVariable Long id, @RequestBody Language language) {
         try {
@@ -100,7 +100,7 @@ public class ProfessionalProfileController {
         }
     }
 
-    @Operation(summary = "save a Skill of a ProfessionalProfileId", tags = {"Skills"})
+    @Operation(summary = "save a Skill of a ProfessionalProfileId", tags = {"Professional Profiles"})
     @PostMapping(path = "/professional_profile/{id}/skills", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Skill> createSkill(@PathVariable Long id, @RequestBody Skill skill) {
         try {
@@ -110,7 +110,7 @@ public class ProfessionalProfileController {
         }
     }
 
-    @Operation(summary = "save a Studie of a ProfessionalProfileId", tags = {"Studies"})
+    @Operation(summary = "save a Studie of a ProfessionalProfileId", tags = {"Professional Profiles"})
     @PostMapping(path = "/professional_profile/{id}/studies", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Studie> createStudie(@PathVariable Long id, @RequestBody Studie studie) {
         try {

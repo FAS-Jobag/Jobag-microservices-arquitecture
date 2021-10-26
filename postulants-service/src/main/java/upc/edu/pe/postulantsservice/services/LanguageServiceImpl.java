@@ -57,4 +57,11 @@ public class LanguageServiceImpl implements LanguageService{
             return languageRepository.save(language);
         }).orElseThrow();
     }
+
+    @Override
+    public List<Language> getLanguagesByProfessionalProfileId(Long professionalProfileId) throws Exception {
+        return professionalProfileRepository.findById(professionalProfileId).map(professionalProfile -> {
+            return professionalProfile.getLanguages();
+        }).orElseThrow();
+    }
 }
