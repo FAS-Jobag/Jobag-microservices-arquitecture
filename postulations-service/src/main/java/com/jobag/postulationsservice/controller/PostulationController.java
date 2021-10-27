@@ -44,6 +44,19 @@ public class PostulationController {
             return ResponseEntity.internalServerError().build();
         }
     }
+    @PutMapping(path = "/{id_postulation}/postulant/{id_postulant}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Postulation> addPostulant(@PathVariable Long id_postulation, @PathVariable Long id_postulant){
+        try {
+          Postulation postulation = postulationService.addPostulationItem(id_postulant, id_postulation);  
+          if(postulation != null){
+              return ResponseEntity.ok(postulation);
+          }else{
+              return ResponseEntity.badRequest().build();
+          }
+        } catch(Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
 
     @DeleteMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Postulation> deleteById(@PathVariable Long id) {
