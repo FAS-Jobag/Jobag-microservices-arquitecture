@@ -56,9 +56,15 @@ public class PostulationController {
     }
 
     @PostMapping(path = "jobOffer/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Postulation> saveByJobOfferId(@PathVariable Long id, @RequestBody Postulation Postulation) {
+    public ResponseEntity<Postulation> saveByJobOfferId(@PathVariable Long id) {
+        Postulation postulation = new Postulation();
         try {
-            return ResponseEntity.ok(postulationService.createPostulacionByJobOfferId(id, Postulation));
+            Postulation newPostulation =postulationService.createPostulacionByJobOfferId(id, postulation);
+            if(newPostulation.getJobOfferId() != 0){
+                return ResponseEntity.ok(newPostulation);
+            }else{
+                return ResponseEntity.badRequest().build();
+            }
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }

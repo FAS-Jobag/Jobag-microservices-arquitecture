@@ -1,10 +1,13 @@
 package com.jobag.postulationsservice.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jobag.postulationsservice.model.JobOffer;
 import com.jobag.postulationsservice.model.ProfessionalProfile;
 import lombok.Data;
 
 import javax.persistence.*;
+
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +26,7 @@ public class Postulation {
     @Temporal(TemporalType.DATE)
     private Date createAt;
 
+    @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "invoice_id")
     private List<PostulationItem> postulationItem;
@@ -30,6 +34,9 @@ public class Postulation {
     @Transient
     private JobOffer jobOffer;
 
+    public Postulation(){
+        postulationItem = new ArrayList<>();
+    }
     @PrePersist
     public void prePersist() {
         this.createAt = new Date();

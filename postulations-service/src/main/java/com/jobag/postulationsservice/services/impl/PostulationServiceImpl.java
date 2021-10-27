@@ -1,11 +1,12 @@
 package com.jobag.postulationsservice.services.impl;
 
 import com.jobag.postulationsservice.client.JobOfferClient;
-import com.jobag.postulationsservice.client.ProfessionalProfileClient;
+import com.jobag.postulationsservice.client.PostulantClient;
 import com.jobag.postulationsservice.entity.Postulation;
 import com.jobag.postulationsservice.entity.PostulationItem;
 import com.jobag.postulationsservice.model.JobOffer;
-import com.jobag.postulationsservice.model.ProfessionalProfile;
+import com.jobag.postulationsservice.model.Postulant;
+import com.jobag.postulationsservice.repository.PostulationItemRepository;
 import com.jobag.postulationsservice.repository.PostulationRepository;
 import com.jobag.postulationsservice.services.PostulationService;
 import lombok.extern.slf4j.Slf4j;
@@ -22,12 +23,13 @@ import java.util.stream.Collectors;
 public class PostulationServiceImpl implements PostulationService {
     @Autowired
     private PostulationRepository postulationRepository;
-
+    @Autowired
+    private PostulationItemRepository postulationItemRepository;
     @Autowired
     JobOfferClient jobOfferClient;
 
     @Autowired
-    ProfessionalProfileClient professionalProfileClient;
+    PostulantClient postulantClient;
 
     @Transactional
     @Override
@@ -65,21 +67,54 @@ public class PostulationServiceImpl implements PostulationService {
         Postulation postulation= postulationRepository.findById(id).orElse(null);
         if (null != postulation){
             JobOffer jobOffer =jobOfferClient.getJobOffer(postulation.getJobOfferId()).getBody();
-            //List<PostulationItem> listItem = postulation.getPostulationItem().stream().map(postulationItem -> {
-            //    ProfessionalProfile professionalProfile = professionalProfileClient.getProfessionalProfile(postulationItem.getProfessionalProfileId()).getBody();
-            //    postulationItem.setProfessionalProfile(professionalProfile);
-            //    return postulationItem;
-            //}).collect(Collectors.toList());
             postulation.setJobOffer(jobOffer);
+            if (postulation.getPostulationItem() != null){
+                List<PostulationItem> listItem = postulation.getPostulationItem().stream().map(postulationItem -> {
+                    Postulant postulant = postulantClient.getPostulant(postulationItem.getId()).getBody();
+                    postulationItem.setPostulant(postulant);
+                    return postulationItem;
+                }).collect(Collectors.toList());
+                postulation.setPostulationItem(listItem);
+            }
         }
         return postulation;
     }
 
     @Override
     public Postulation createPostulacionByJobOfferId(Long jobOfferId, Postulation postulation) {
+        Postulation postulationNew;
         if(null != jobOfferClient.getJobOffer(jobOfferId).getBody()){
             postulation.setJobOfferId(jobOfferId);
+            postulationNew = postulationRepository.save(postulation);
+            JobOffer jobOffer = jobOfferClient.getJobOffer(jobOfferId).getBody();
+            postulationNew.setJobOffer(jobOffer);
+            return postulationNew;
+        }else{
+            postulationNew = new Postulation();
+            postulationNew.setJobOfferId(0L);
+            return postulationNew;
         }
-        return postulationRepository.save(postulation);
     }
+
+	@Override
+	public Postulation addPostulationItem(Long postulantId, Long postulationId) {
+      Postulation postulation = postulationRepository.findById(postulationId).orElse(null);
+      if (postulation != null){
+          Postulant postulant = postulantClient.getPostulant(postulantId).getBody();
+          if (postulant != null){
+              PostulationItem newPostulationItem = new PostulationItem();
+              newPostulationItem.setPostulantId(postulantId);
+              postulation.getPostulationItem().add(newPostulationItem);
+                List<PostulationItem> listItem = postulation.getPostulationItem().stream().map(postulationItem -> {
+                    Postulant postulantInPostulation = postulantClient.getPostulant(postulationItem.getId()).getBody();
+                    postulationItem.setPostulant(postulantInPostulation);
+                    return postulationItem;
+                }).collect(Collectors.toList());
+                postulation.setPostulationItem(listItem);
+          }
+          return postulation;
+      }
+      return postulation;
+	}
+
 }
