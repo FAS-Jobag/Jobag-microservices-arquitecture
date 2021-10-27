@@ -61,7 +61,13 @@ public class ProfessionalProfileServiceImpl implements ProfessionalProfileServic
     @Override
     public Optional<ProfessionalProfile> getByPostulantId(Long postulantId) throws Exception {
         return postulantRepository.findById(postulantId).map(postulant -> {
-            return professionalProfileRepository.findById(postulant.getProfessionalProfile().getId());
+
+            if(postulant.getProfessionalProfile().getId() == null){
+                return professionalProfileRepository.findById(0L);
+            }else{
+
+                return professionalProfileRepository.findById(postulant.getProfessionalProfile().getId());
+            }
         }).orElseThrow();
     }
 
