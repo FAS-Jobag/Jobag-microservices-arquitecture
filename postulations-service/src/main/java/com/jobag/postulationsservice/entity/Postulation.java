@@ -28,7 +28,7 @@ public class Postulation {
 
     @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "invoice_id")
+    @JoinColumn(name = "postulation_id")
     private List<PostulationItem> postulationItem;
 
     @Transient

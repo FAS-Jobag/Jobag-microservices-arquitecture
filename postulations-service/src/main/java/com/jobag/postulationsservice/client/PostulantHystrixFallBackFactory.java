@@ -20,7 +20,7 @@ public class PostulantHystrixFallBackFactory implements PostulantClient {
           .number("none")
           .password("none")
           .document("none")
-          .civilStatus("none")
+          .civil_status("none")
           .createdAt(new Date()).build();
       return ResponseEntity.ok(postulant);
 	}

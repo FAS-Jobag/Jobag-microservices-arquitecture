@@ -18,6 +18,6 @@ public class Postulant {
     private String number;
     private String password;
     private String document;
-    private String civilStatus;
+    private String civil_status;
     private Date createdAt;
 }

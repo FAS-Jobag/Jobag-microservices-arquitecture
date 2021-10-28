@@ -24,8 +24,6 @@ public class PostulationServiceImpl implements PostulationService {
     @Autowired
     private PostulationRepository postulationRepository;
     @Autowired
-    private PostulationItemRepository postulationItemRepository;
-    @Autowired
     JobOfferClient jobOfferClient;
 
     @Autowired
@@ -105,14 +103,9 @@ public class PostulationServiceImpl implements PostulationService {
               PostulationItem newPostulationItem = new PostulationItem();
               newPostulationItem.setPostulantId(postulantId);
               postulation.getPostulationItem().add(newPostulationItem);
-                List<PostulationItem> listItem = postulation.getPostulationItem().stream().map(postulationItem -> {
-                    Postulant postulantInPostulation = postulantClient.getPostulant(postulationItem.getId()).getBody();
-                    postulationItem.setPostulant(postulantInPostulation);
-                    return postulationItem;
-                }).collect(Collectors.toList());
-                postulation.setPostulationItem(listItem);
+                
           }
-          return postulation;
+          return postulationRepository.save(postulation);
       }
       return postulation;
 	}

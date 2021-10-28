@@ -20,4 +20,5 @@ public class PostulationItem {
     private Long postulantId;
     @Transient
     private Postulant postulant;
+
 }
