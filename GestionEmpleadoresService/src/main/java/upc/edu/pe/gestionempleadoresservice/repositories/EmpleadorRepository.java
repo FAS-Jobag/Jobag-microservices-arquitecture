@@ -12,4 +12,6 @@ public interface EmpleadorRepository extends JpaRepository<Empleador, Long>{
     Boolean existsByDNI(Long DNI);
     Boolean existsByCorreo(String correo);
     Boolean existsByCelular(Long celular);
+    Empleador findByCorreoAndContraseña(String correo, String contraseña);
+
 }

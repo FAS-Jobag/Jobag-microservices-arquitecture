@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import upc.edu.pe.gestionempleadoresservice.entities.Empleador;
+import upc.edu.pe.gestionempleadoresservice.models.User;
 import upc.edu.pe.gestionempleadoresservice.services.EmpleadorService;
 
 import javax.validation.Valid;
@@ -132,5 +133,21 @@ public class EmpleadorController{
             e.printStackTrace();
         }
         return jsonString;
+    }
+
+    @Operation(summary = "Authenticate employer by email and password", description = "Get employer by email and password", tags={"empleadores"})
+    @PostMapping(path = "/empleadores/login", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Empleador> authenticatePostulant(@RequestBody User user) {
+        try{
+            Empleador empleador = empleadoresService.findByEmailAndPassword(user.correo,user.contraseña);
+
+            if(empleador != null) {
+                return ResponseEntity.ok(empleador);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
