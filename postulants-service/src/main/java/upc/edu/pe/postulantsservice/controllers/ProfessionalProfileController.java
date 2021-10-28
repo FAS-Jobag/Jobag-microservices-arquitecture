@@ -55,6 +55,21 @@ public class ProfessionalProfileController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @Operation(summary = "Get Professional Profile by Postulant ID", description = "Get Professional Profile by ID", tags={"Professional Profiles"})
+    @GetMapping(path = "postulant/{id}/professional_profile", produces = MediaType.APPLICATION_JSON_VALUE )
+    public ResponseEntity<ProfessionalProfile> getByPostulantId(@PathVariable("id") Long id){
+
+        try {
+            Optional<ProfessionalProfile>optionalProfessionalProfile = professionalProfileService.getByPostulantId(id);
+            if(optionalProfessionalProfile.isPresent()){
+                return new ResponseEntity<ProfessionalProfile>(optionalProfessionalProfile.get(),HttpStatus.OK);
+            }else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch(Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     /*@Operation(summary = "Post Professional Profile", description = "Post Professional Profile", tags={"Professional Profiles"})
     @PostMapping(path = "/professional_profile", produces = MediaType.APPLICATION_JSON_VALUE)

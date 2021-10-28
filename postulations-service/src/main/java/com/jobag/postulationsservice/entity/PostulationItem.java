@@ -2,7 +2,7 @@ package com.jobag.postulationsservice.entity;
 
 
 
-import com.jobag.postulationsservice.model.ProfessionalProfile;
+import com.jobag.postulationsservice.model.Postulant;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,8 +16,9 @@ public class PostulationItem {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "professional_profile_id")
-    private Long professionalProfileId;
+    @Column(name = "postulant_id")
+    private Long postulantId;
     @Transient
-    private ProfessionalProfile professionalProfile;
+    private Postulant postulant;
+
 }

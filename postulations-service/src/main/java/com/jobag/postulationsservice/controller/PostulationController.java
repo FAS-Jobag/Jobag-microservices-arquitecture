@@ -45,6 +45,22 @@ public class PostulationController {
         }
     }
 
+    @Operation(summary="End-point para agregar un postulante a una postulacion existente",
+            description="Permite agregar un postulante a una postulacion especificando el id de la postulation y el id de el postulante previamente creados")
+    @PutMapping(path = "/{id_postulation}/postulant/{id_postulant}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Postulation> addPostulant(@PathVariable Long id_postulation, @PathVariable Long id_postulant){
+        try {
+          Postulation postulation = postulationService.addPostulationItem(id_postulant, id_postulation);  
+          if(postulation != null){
+              return ResponseEntity.ok(postulation);
+          }else{
+              return ResponseEntity.badRequest().build();
+          }
+        } catch(Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
     @DeleteMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Postulation> deleteById(@PathVariable Long id) {
         try {
@@ -55,10 +71,18 @@ public class PostulationController {
         }
     }
 
+    @Operation(summary="Crear una postulacion para una oferta de trabajo",
+            description="Crea una postulacion a partir de una oferta de trabajo existente. este proceso solo se realiza una vez por oferta de trabajo")
     @PostMapping(path = "jobOffer/id/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Postulation> saveByJobOfferId(@PathVariable Long id, @RequestBody Postulation Postulation) {
+    public ResponseEntity<Postulation> saveByJobOfferId(@PathVariable Long id) {
+        Postulation postulation = new Postulation();
         try {
-            return ResponseEntity.ok(postulationService.createPostulacionByJobOfferId(id, Postulation));
+            Postulation newPostulation =postulationService.createPostulacionByJobOfferId(id, postulation);
+            if(newPostulation.getJobOfferId() != 0){
+                return ResponseEntity.ok(newPostulation);
+            }else{
+                return ResponseEntity.badRequest().build();
+            }
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
