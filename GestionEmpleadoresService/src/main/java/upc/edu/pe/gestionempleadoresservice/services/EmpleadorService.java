@@ -25,4 +25,8 @@ public interface EmpleadorService{
 
     //Eliminar por Id
     void deleteById(Empleador empleadores) throws Exception;
+
+    //Buscar por Email y Password
+    Empleador findByEmailAndPassword(String correo, String contraseña);
+
 }

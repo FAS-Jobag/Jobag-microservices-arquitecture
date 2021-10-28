@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import upc.edu.pe.postulantsservice.models.User;
 import upc.edu.pe.postulantsservice.services.PostulantService;
 import upc.edu.pe.postulantsservice.services.ProfessionalProfileService;
 import upc.edu.pe.postulantsservice.entity.Postulant;
@@ -92,5 +93,21 @@ public class PostulantController {
         }
     }
 
+    @Operation(summary = "Authenticate postulant by email and password", description = "Get postulant by email and password", tags={"Postulants"})
+    @PostMapping(path = "/postulants/login", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Postulant> authenticatePostulant(@RequestBody User user) {
+        try{
+            Postulant postulant = postulantService.findByEmailAndPassword(user.email,user.password);
+
+            if(postulant != null) {
+                return ResponseEntity.ok(postulant);
+                //return new ResponseEntity<Postulant>(postulant, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }

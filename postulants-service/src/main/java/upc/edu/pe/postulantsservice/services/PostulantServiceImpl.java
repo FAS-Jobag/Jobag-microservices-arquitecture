@@ -45,4 +45,10 @@ public class PostulantServiceImpl implements PostulantService{
     public void deleteById(Long id) throws Exception {
         postulantRepository.deleteById(id);
     }
+
+    @Transactional
+    @Override
+    public Postulant findByEmailAndPassword(String email, String password) {
+        return postulantRepository.findByEmailAndPassword(email,password);
+    }
 }

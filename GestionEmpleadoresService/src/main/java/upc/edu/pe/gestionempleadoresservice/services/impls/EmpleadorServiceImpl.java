@@ -80,5 +80,8 @@ public class EmpleadorServiceImpl implements EmpleadorService{
         empleadorRepository.delete(empleadorDB);
     }
 
-
+    @Override
+    public Empleador findByEmailAndPassword(String correo, String contraseña) {
+        return empleadorRepository.findByCorreoAndContraseña(correo,contraseña);
+    }
 }

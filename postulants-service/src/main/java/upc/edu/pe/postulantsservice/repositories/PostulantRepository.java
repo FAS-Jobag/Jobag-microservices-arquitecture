@@ -4,4 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import upc.edu.pe.postulantsservice.entity.Postulant;
 
 public interface PostulantRepository extends JpaRepository<Postulant, Long>  {
+    Postulant findByEmailAndPassword(String email, String password);
 }

@@ -7,4 +7,5 @@ import java.util.List;
 public interface LanguageService extends CrudServices<Language, Long>{
     Language saveLanguageByProfessionalProfileId(Long id, Language language) throws Exception;
     List<Language> getLanguagesByProfessionalProfileId(Long professionalProfileId) throws Exception;
+
 }
