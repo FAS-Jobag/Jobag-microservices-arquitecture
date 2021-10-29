@@ -9,8 +9,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import lombok.Data;
+import upc.edu.pe.subscriptionservice.models.Postulant;
 
 /**
 * PostulantsPlans
@@ -25,6 +27,9 @@ public class PostulantsPlans {
 
 	@Column(name = "postulant_id")
 	private Long postulantId;
+
+	@Transient
+	private Postulant postulant;
 
 	@ManyToOne
 	@JoinColumn(name = "plan_postulant_id")
