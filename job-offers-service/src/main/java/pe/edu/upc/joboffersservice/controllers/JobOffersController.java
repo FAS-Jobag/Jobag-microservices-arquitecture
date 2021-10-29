@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.joboffersservice.entities.Contract;
+import pe.edu.upc.joboffersservice.entities.Employeer;
 import pe.edu.upc.joboffersservice.entities.Interview;
 import pe.edu.upc.joboffersservice.entities.JobOffer;
 import pe.edu.upc.joboffersservice.services.ContractService;
@@ -45,7 +46,7 @@ public class JobOffersController {
         }
     }
 
-    @Operation(summary = "save a job offer", tags = {"job-offers"})
+    /*@Operation(summary = "save a job offer", tags = {"job-offers"})
     @ApiResponse(responseCode = "200", description = "this return the job offer saved")
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<JobOffer> save(@RequestBody JobOffer jobOffer) {
@@ -54,7 +55,7 @@ public class JobOffersController {
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
-    }
+    }*/
 
     @Operation(summary = "update a job offer for id", tags = {"job-offers"})
     @ApiResponse(responseCode = "200", description = "this return the job offer updated")
@@ -122,4 +123,28 @@ public class JobOffersController {
             return ResponseEntity.internalServerError().build();
         }
     }
+
+
+    @Operation(summary = "save a job offer by Employeer ID", tags = {"job-offers"})
+    @ApiResponse(responseCode = "200", description = "this return the job offer saved by Employeer ID")
+    @PostMapping(path="/employeer/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<JobOffer> saveByEmployeerId(@PathVariable Long id, @RequestBody JobOffer jobOffer) {
+
+        JobOffer newJobOffer = jobOfferService.createJobOfferByEmployeerId(id, jobOffer);
+        System.out.println(newJobOffer);
+
+        try{
+
+
+            if(newJobOffer.getEmployeerId() != 0) {
+                return ResponseEntity.ok(newJobOffer);
+            }else {
+                return ResponseEntity.badRequest().build();
+            }
+
+        }catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
 }
