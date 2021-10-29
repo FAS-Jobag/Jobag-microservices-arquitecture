@@ -61,4 +61,9 @@ public class JobOfferServiceImpl implements JobOfferService {
             return jobOfferNew;
         }
     }
+
+    @Override
+    public List<JobOffer> findByEmployeerId(Long employerId) throws Exception {
+        return jobOfferRepository.findJobOfferByEmployeerId(employerId);
+    }
 }

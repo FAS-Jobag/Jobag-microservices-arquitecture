@@ -147,4 +147,16 @@ public class JobOffersController {
         }
     }
 
+    @Operation(summary = "Get JobOffers By Employeer Id ", tags = {"job-offers"})
+    @ApiResponse(responseCode = "200", description = "this return the list job offer by Employeer ID")
+    @GetMapping(path="/employeer/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<JobOffer>> getJobOfferByEmployeeId(@PathVariable("id") Long id) throws Exception {
+
+        List<JobOffer> jobOffers = jobOfferService.findByEmployeerId(id);
+        if (jobOffers.isEmpty()) {
+            return  ResponseEntity.noContent().build();
+        }
+        return  ResponseEntity.ok(jobOffers);
+    }
+
 }
