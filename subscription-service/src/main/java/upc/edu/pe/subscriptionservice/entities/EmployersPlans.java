@@ -1,16 +1,10 @@
 package upc.edu.pe.subscriptionservice.entities;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import lombok.Data;
+import upc.edu.pe.subscriptionservice.models.Employer;
 
 /**
 * EmployersPlans
@@ -24,6 +18,9 @@ public class EmployersPlans {
 	private Long id;
 	@Column(name = "employer_id")
 	private Long employerId;
+
+	@Transient
+	private Employer employer;
 
 	@ManyToOne
 	@JoinColumn(name = "plan_employer_id")

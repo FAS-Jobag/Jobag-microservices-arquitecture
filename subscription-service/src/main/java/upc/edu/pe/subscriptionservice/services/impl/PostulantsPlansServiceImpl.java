@@ -63,8 +63,6 @@ public class PostulantsPlansServiceImpl implements PostulantsPlansService {
 	@Transactional
 	@Override
 	public PostulantsPlans assignSubscriptionToPostulant(Long subscriptionId, Long postulantId) {
-		// Postulant postulant = postulantClient.getPostulant(1).getBody();
-		// System.out.println(postulant.getFirstName());
 		if (postulantsPlansRepository.findByPostulantId(postulantId) != null) return null;
 
 		return plansPostulantRepository.findById(subscriptionId).map(plan -> {
