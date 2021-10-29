@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import upc.edu.pe.subscriptionservice.entities.PlanPostulant;
 import upc.edu.pe.subscriptionservice.entities.PostulantsPlans;
 import upc.edu.pe.subscriptionservice.services.PostulantsPlansService;
 
@@ -43,6 +44,18 @@ public class PostulantsPlansController {
         try {
             postulantsPlansService.unassignSubscriptionToPostulant(subscriptionId, postulantId);
             return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @Operation(summary = "Get plan by postulant id", tags = {"Postulants-Plans"})
+    @ApiResponse(responseCode = "200", description = "this return Postulants plans")
+    @GetMapping(path = "/subscriptions")
+    public ResponseEntity<?> getPlanByPostulantId(@PathVariable Long postulantId) {
+        try {
+            PostulantsPlans plan = postulantsPlansService.getPlanByPostulantId(postulantId);
+            return ResponseEntity.ok(plan);
         } catch (Exception e) {
             return ResponseEntity.internalServerError().build();
         }
