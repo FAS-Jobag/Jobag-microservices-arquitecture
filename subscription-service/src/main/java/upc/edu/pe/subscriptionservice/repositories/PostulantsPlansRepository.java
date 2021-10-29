@@ -10,4 +10,5 @@ import upc.edu.pe.subscriptionservice.entities.PostulantsPlans;
 */
 @Repository
 public interface PostulantsPlansRepository extends JpaRepository<PostulantsPlans, Long> {
+    PostulantsPlans findByPostulantId(Long postulantId);
 }

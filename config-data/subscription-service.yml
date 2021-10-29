@@ -28,10 +28,19 @@ spring:
 logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} ${LOG_LEVEL_PATTERN:-%5p} %m%n"
+# eureka client
 eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8099/eureka/
+# Feign and Hystrix
+Feign:
+  hystrix:
+    enabled: true
+hystrix:
+  dashboard:
+    proxy-stream-allow-list: "*"
+# Actuator    
 management:
   endpoints:
     web:

@@ -9,6 +9,6 @@ import upc.edu.pe.subscriptionservice.entities.PostulantsPlans;
 */
 @Service
 public interface PostulantsPlansService extends CrudServices<PostulantsPlans, Long> {
-
-	
+    PostulantsPlans assignSubscriptionToPostulant(Long subscriptionId, Long postulantId);
+    void unassignSubscriptionToPostulant(Long subscriptionId, Long postulantId);
 }
