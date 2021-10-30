@@ -41,6 +41,14 @@ public class JobOffer {
     // publication date
     private Date date;
 
+    @Column(name="employeer_id")
+    @JsonIgnore
+    private Long employeerId;
+
+    @Transient
+    @JsonIgnore
+    private Employeer employeer;
+
     @Lob
     // description of experience necessary
     private String experience;
