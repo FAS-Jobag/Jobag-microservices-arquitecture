@@ -5,7 +5,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import upc.edu.pe.subscriptionservice.entities.PlanPostulant;
 import upc.edu.pe.subscriptionservice.entities.PostulantsPlans;
 import upc.edu.pe.subscriptionservice.services.PostulantsPlansService;
 
