@@ -50,7 +50,7 @@ public class PlansPostulantController {
 		}
 	}
 
-	@Operation(summary = "Create Plan to Postulant", description = "Create new plan of subscription for new postulants", tags = {"plans_postulant"})
+	@Operation(summary = "Create Plan to Postulant", description = "Create new plan of subscription for postulants: Description limit: 70 characters, Status limit: 1 character", tags = {"plans_postulant"})
 	@ApiResponses( value = {
 		@ApiResponse(responseCode = "200", description = "Created Plan", content = @Content(mediaType = "application/json"))
 	})

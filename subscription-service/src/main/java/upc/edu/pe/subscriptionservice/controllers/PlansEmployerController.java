@@ -50,7 +50,7 @@ public class PlansEmployerController {
 		}
 	}
 
-	@Operation(summary = "Create plan for employer", description = "Create Plan for employer", tags = {"plans_employer"})
+	@Operation(summary = "Create plan for employer", description = "Create Plan for employer: Description limit: 70 characters, Status limit: 1 character", tags = {"plans_employer"})
 	@ApiResponses( value = {
 		@ApiResponse(responseCode = "200", description = "Created plan", content = @Content(mediaType = "application/json"))
 	})
