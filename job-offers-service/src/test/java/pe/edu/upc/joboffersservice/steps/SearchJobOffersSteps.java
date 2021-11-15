@@ -11,17 +11,17 @@ public class SearchJobOffersSteps {
     private final RestTemplate restTemplate = new RestTemplate();
     private String url = "http://localhost:8093/api/";
     private int numberElements;
+    private int expectedNumberElements;
 
     @Given("the postulant wishes to search for job offers")
     public void thePostulantWishesToSearchForJobOffers() {
         url.concat("job-offers");
         numberElements = 0;
-
     }
 
     @Given("no job offers available")
     public void noJobOffersAvailable() {
-        System.out.println("Helloda");
+        expectedNumberElements = 0;
     }
 
     @When("searches for these job offers")
@@ -37,6 +37,6 @@ public class SearchJobOffersSteps {
 
     @Then("the list of jobs offers is shown without elements")
     public void theListOfJobsOffersIsShownWithoutElements() {
-        Assertions.assertEquals(numberElements, 0);
+        Assertions.assertEquals(numberElements, expectedNumberElements);
     }
 }

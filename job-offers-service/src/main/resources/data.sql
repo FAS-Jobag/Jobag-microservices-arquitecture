@@ -1,0 +1,2 @@
+INSERT INTO `job_offers` (id, create_at, date, description, employeerId, experience, name, salary, status, type, workplace)
+                VALUES (1, NOW(), 'description', 1, 'experience','Job offer name', 2000.00, '1', 'type', 'workplace');
