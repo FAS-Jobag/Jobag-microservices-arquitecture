@@ -10,7 +10,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PlanEmployer {
-
     private RestTemplate restTemplate = new RestTemplate();
     private String Mensaje = null;
 
@@ -75,7 +74,8 @@ public class PlanEmployer {
         try{
             assertTrue(!enter.isEmpty());
         }catch (RestClientException e){
-            Mensaje = "Felicidades por adquirir el nuevo plan";
+            Mensaje = "Felicidades por adquirir el nuevo plan" +
+                    "";
             assertNotNull(Mensaje);
         }
     }

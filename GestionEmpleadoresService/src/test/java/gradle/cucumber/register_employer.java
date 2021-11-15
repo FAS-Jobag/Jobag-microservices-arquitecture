@@ -9,7 +9,6 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 import upc.edu.pe.gestionempleadoresservice.entities.Empleador;
 
-
 import java.nio.charset.Charset;
 import java.util.Random;
 
@@ -32,55 +31,47 @@ public class register_employer {
 
     @When("Press the option to register by affiliating position in a company and a password")
     public void pressTheOptionToRegisterByAffiliatingCompanyDataRUCAndAPassword() {
-        String url = "https://rcuencam.github.io/Jobag/";
-        String enter = restTemplate.getForObject(url, String.class);
-        Empleador newEmpleador = new Empleador(randomLong(), randomString(), randomString(), randomLong(), randomString(), randomLong(), randomString(), "14/11/2021", "T");
-        assertNotNull(newEmpleador);
-        assertTrue(!enter.isEmpty());
+        Empleador empleador;
+        String position = "Gerente de finanzas";
+        String password = "cetafe@2021";
+
+        empleador = new Empleador(randomLong(), randomString(), randomString(), randomLong(), position, randomLong(), password, null, "T");
+        assertNotNull(empleador);
     }
 
     @Then("You are notified by text message that the registration was successful")
     public void youAreNotifiedByTextMessageThatTheRegistrationWasSuccessful() {
-        String url = "https://rcuencam.github.io/Jobag/";
-        String enter = restTemplate.getForObject(url, String.class);
         try{
-            Empleador newEmpleador = new Empleador(randomLong(), randomString(), randomString(), randomLong(), randomString(), randomLong(), randomString(), "14/11/2021", "T");
+            Empleador newEmpleador = new Empleador(randomLong(), randomString(), randomString(), randomLong(), randomString(), randomLong(), randomString(), null, "T");
             assertNotNull(newEmpleador);
         }catch (RestClientException e){
             Mensaje_Confirmacion = "Su registro fue exitoso";
             assertEquals(Mensaje_Confirmacion, "Su registro fue exitoso");
         }
-        assertTrue(!enter.isEmpty());
     }
 
     //Second Scenario
 
     @When("Press the option to register and it does not fill in the data properly")
     public void pressTheOptionToRegisterAndItDoesNotFillInTheDataProperly() {
-        String url = "https://rcuencam.github.io/Jobag/";
-        String enter = restTemplate.getForObject(url, String.class);
         try{
-            Empleador newEmpleador = new Empleador(randomLong(), null, null, null, randomString(), randomLong(), randomString(), "14/11/2021", "T");
+            Empleador newEmpleador = new Empleador(randomLong(), null, null, null, randomString(), randomLong(), randomString(), null, "T");
             assertNotNull(newEmpleador);
         }catch (RestClientException e){
             Mensaje_Error = "Complete los datos vacios";
             assertEquals(Mensaje_Error, "Complete los datos vacios");
         }
-        assertTrue(!enter.isEmpty());
     }
 
     @Then("The registration process is not carried out because you must enter valid data")
     public void theRegistrationProcessIsNotCarriedOutBecauseYouMustEnterValidData() {
-        String url = "https://rcuencam.github.io/Jobag/";
-        String enter = restTemplate.getForObject(url, String.class);
         try{
-            Empleador newEmpleador = new Empleador(randomLong(), randomString(), randomString(), 12L, randomString(), null, randomString(), "14/11/2021", "T");
+            Empleador newEmpleador = new Empleador(randomLong(), randomString(), randomString(), 12L, randomString(), null, randomString(), null, "T");
             assertNotNull(newEmpleador);
         }catch (RestClientException e){
             Mensaje_Error = "Ingrese los datos correctamente";
             assertEquals(Mensaje_Error, "Ingrese los datos correctamente");
         }
-        assertTrue(!enter.isEmpty());
     }
 
     //Generate Random
