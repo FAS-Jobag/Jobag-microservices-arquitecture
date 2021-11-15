@@ -37,6 +37,8 @@ dependencies {
     implementation 'de.codecentric:spring-boot-admin-starter-client'
     implementation 'org.springframework.cloud:spring-cloud-starter-bootstrap'
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
+    //  Feign and Hystrix configuration
+    implementation 'org.springframework.cloud:spring-cloud-openfeign-core:2.2.5.RELEASE'
 
     // https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-netflix-hystrix
     implementation 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix:2.2.9.RELEASE'

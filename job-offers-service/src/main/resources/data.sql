@@ -1,0 +1,1 @@
+INSERT INTO job_offers (id, name, type, salary, description, workplace, date, employeer_id, experience, create_at, status) VALUES(1, 'job posting name', 'full-time', 2800.00, 'description of work', 'description of workplace', NOW(), 1, 'description of experience necessary', NOW(), '1');
