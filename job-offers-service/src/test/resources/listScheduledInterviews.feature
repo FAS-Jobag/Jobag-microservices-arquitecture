@@ -7,6 +7,6 @@ Feature: List scheduled interviews
 
   Scenario: the job offer does not have scheduled interviews
     Given the employer wants to see the interviews of a job offer
-    And the job offer does not have interviews
+    And the job offer does not have scheduled interviews
     When verify the interviews associated to job offer
     Then the list of interviews is displayed with zero items

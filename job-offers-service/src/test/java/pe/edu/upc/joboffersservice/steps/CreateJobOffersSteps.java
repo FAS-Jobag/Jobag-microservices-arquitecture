@@ -20,7 +20,7 @@ public class CreateJobOffersSteps {
 
     @Given("the employer wants to publish a job offer")
     public void theEmployerWantsToPublishAJobOffer() {
-        uri = basePath + "job-offers/employer/1";
+        uri = basePath + "job-offers/employeer/1";
     }
 
     @When("publishes his job offer")
@@ -39,12 +39,12 @@ public class CreateJobOffersSteps {
 
     @Then("the job offer is associated with the employer")
     public void theJobOfferIsAssociatedWithTheEmployer() {
-        JobOffer response = restTemplate.postForObject(uri, jobOffer, JobOffer.class);
+        JobOffer[] response = restTemplate.getForObject(uri, JobOffer[].class);
     }
 
     @Given("the employer created a job offer")
     public void theEmployerCreatedAJobOffer() {
-        uri = basePath + "job-offers/employer/1";
+        uri = basePath + "job-offers/employeer/1";
     }
 
     @When("consults the job offers that he has created")

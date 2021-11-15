@@ -37,6 +37,6 @@ public class SearchJobOffersSteps {
 
     @Then("the list of jobs offers is shown without elements")
     public void theListOfJobsOffersIsShownWithoutElements() {
-        Assertions.assertEquals(numberElements, expectedNumberElements);
+        assert(numberElements == expectedNumberElements);
     }
 }
