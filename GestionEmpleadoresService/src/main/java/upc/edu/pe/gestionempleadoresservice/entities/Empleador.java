@@ -38,9 +38,6 @@ public class Empleador{
     @Column(length = 10, nullable = false)
     private String status;
 
-    public Empleador() {
-    }
-
     public Empleador(Long id, String nombres, String apellidos, Long DNI, String correo, Long celular, String contraseña, Date createAt, String status) {
         this.id = id;
         this.nombres = nombres;
@@ -51,6 +48,9 @@ public class Empleador{
         this.contraseña = contraseña;
         this.createAt = createAt;
         this.status = status;
+    }
+
+    public Empleador() {
     }
 
     public Long getId() {
