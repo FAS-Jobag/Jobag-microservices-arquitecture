@@ -46,11 +46,15 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.cucumber:cucumber-java:7.0.0'
+<<<<<<< HEAD
 // https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java
     implementation 'org.seleniumhq.selenium:selenium-java:2.41.0'
 // https://mvnrepository.com/artifact/junit/junit
     testImplementation 'junit:junit:4.4'
     testImplementation 'org.junit.vintage:junit-vintage-engine:5.7.2'
+=======
+
+>>>>>>> ee6485ed24553cb7f700bf611d6851b730dc186c
 }
 
 dependencyManagement {
