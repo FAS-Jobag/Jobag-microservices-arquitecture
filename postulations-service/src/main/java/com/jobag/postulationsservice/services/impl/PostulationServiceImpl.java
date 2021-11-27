@@ -38,7 +38,20 @@ public class PostulationServiceImpl implements PostulationService {
     @Transactional(readOnly = true)
     @Override
     public List<Postulation> findAll() throws Exception {
-        return postulationRepository.findAll();
+        List<Postulation> lista = postulationRepository.findAll();
+        lista.forEach( p -> {
+            JobOffer jobOffer =jobOfferClient.getJobOffer(p.getJobOfferId()).getBody();
+            p.setJobOffer(jobOffer);
+            if (p.getPostulationItem() != null){
+                List<PostulationItem> listItem = p.getPostulationItem().stream().map(postulationItem -> {
+                    Postulant postulant = postulantClient.getPostulant(postulationItem.getPostulantId()).getBody();
+                    postulationItem.setPostulant(postulant);
+                    return postulationItem;
+                }).collect(Collectors.toList());
+                p.setPostulationItem(listItem);
+            }
+        });
+        return lista;
     }
 
     @Transactional(readOnly = true)
@@ -68,7 +81,7 @@ public class PostulationServiceImpl implements PostulationService {
             postulation.setJobOffer(jobOffer);
             if (postulation.getPostulationItem() != null){
                 List<PostulationItem> listItem = postulation.getPostulationItem().stream().map(postulationItem -> {
-                    Postulant postulant = postulantClient.getPostulant(postulationItem.getId()).getBody();
+                    Postulant postulant = postulantClient.getPostulant(postulationItem.getPostulantId()).getBody();
                     postulationItem.setPostulant(postulant);
                     return postulationItem;
                 }).collect(Collectors.toList());
@@ -102,6 +115,7 @@ public class PostulationServiceImpl implements PostulationService {
           if (postulant != null){
               PostulationItem newPostulationItem = new PostulationItem();
               newPostulationItem.setPostulantId(postulantId);
+              newPostulationItem.setPostulant(postulant);
               postulation.getPostulationItem().add(newPostulationItem);
                 
           }
